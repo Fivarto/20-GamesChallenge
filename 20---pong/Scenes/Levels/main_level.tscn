@@ -1,0 +1,160 @@
+[gd_scene load_steps=16 format=3 uid="uid://c372olxibms5e"]
+
+[ext_resource type="Texture2D" uid="uid://ctp88dvyq21w6" path="res://Assets/tenis_court.png" id="1_ib1c2"]
+[ext_resource type="Script" path="res://Scripts/Levels/main_level.gd" id="1_klggt"]
+[ext_resource type="PackedScene" uid="uid://bm1x7w4u4bsni" path="res://Scenes/Actors/paddle.tscn" id="2_aobx5"]
+[ext_resource type="PackedScene" uid="uid://3gpiyvl7y4bl" path="res://Scenes/Balls/ball.tscn" id="3_63nlj"]
+[ext_resource type="FontFile" uid="uid://ns7ywwfij86p" path="res://Assets/Fonts/PixelOperator8.ttf" id="4_g080o"]
+[ext_resource type="Shader" path="res://Shaders/ctr_shadder.gdshader" id="6_7tw5u"]
+[ext_resource type="Texture2D" uid="uid://n0xtbt7j6tm7" path="res://Assets/UI/button.png" id="7_5agqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jf3md"]
+size = Vector2(809.375, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swmtt"]
+size = Vector2(20, 359)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsayu"]
+size = Vector2(20, 369)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ivua"]
+shader = ExtResource("6_7tw5u")
+
+[sub_resource type="QuadMesh" id="QuadMesh_alhf3"]
+size = Vector2(800, 360)
+center_offset = Vector3(400, 180, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xlvj"]
+texture = ExtResource("7_5agqj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vls1h"]
+texture = ExtResource("7_5agqj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eddnf"]
+texture = ExtResource("7_5agqj")
+
+[node name="Main_Level" type="Node2D"]
+script = ExtResource("1_klggt")
+
+[node name="tenis_court" type="Sprite2D" parent="."]
+position = Vector2(400, 180)
+texture = ExtResource("1_ib1c2")
+
+[node name="Player1" parent="." instance=ExtResource("2_aobx5")]
+position = Vector2(46, 186)
+player_name = "Player1"
+
+[node name="Player2" parent="." instance=ExtResource("2_aobx5")]
+position = Vector2(751, 166)
+rotation = 3.14159
+player_name = "Player2"
+
+[node name="wall_up" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_up"]
+position = Vector2(398.688, -10)
+shape = SubResource("RectangleShape2D_jf3md")
+
+[node name="wall_down" type="StaticBody2D" parent="."]
+position = Vector2(0, 380)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_down"]
+position = Vector2(397.625, -10)
+shape = SubResource("RectangleShape2D_jf3md")
+
+[node name="cpu_score_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cpu_score_area"]
+position = Vector2(-18, 180.5)
+shape = SubResource("RectangleShape2D_swmtt")
+
+[node name="player_score_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_score_area"]
+position = Vector2(815, 174.5)
+shape = SubResource("RectangleShape2D_dsayu")
+
+[node name="Ball" parent="." instance=ExtResource("3_63nlj")]
+position = Vector2(402, 179)
+
+[node name="player_score_label" type="Label" parent="."]
+offset_left = 350.0
+offset_top = 9.0
+offset_right = 392.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("4_g080o")
+text = "100"
+
+[node name="cpu_score_label" type="Label" parent="."]
+offset_left = 407.0
+offset_top = 9.0
+offset_right = 449.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("4_g080o")
+text = "100"
+horizontal_alignment = 2
+
+[node name="win_label" type="Label" parent="."]
+visible = false
+offset_left = 284.0
+offset_top = 88.0
+offset_right = 564.0
+offset_bottom = 111.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_g080o")
+text = "CONGRATS CPU WON"
+
+[node name="start_ball_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="start_game_label" type="Label" parent="."]
+offset_left = 214.0
+offset_top = 135.0
+offset_right = 586.0
+offset_bottom = 158.0
+theme_override_fonts/font = ExtResource("4_g080o")
+text = "press space to start the game"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_2ivua")
+mesh = SubResource("QuadMesh_alhf3")
+
+[node name="win_menu" type="VBoxContainer" parent="."]
+process_mode = 2
+visible = false
+offset_left = 311.0
+offset_top = 201.0
+offset_right = 485.0
+offset_bottom = 253.0
+
+[node name="btn_restart_game" type="Button" parent="win_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_g080o")
+theme_override_styles/hover = SubResource("StyleBoxTexture_8xlvj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vls1h")
+theme_override_styles/normal = SubResource("StyleBoxTexture_eddnf")
+text = "RESTART GAME"
+
+[node name="btn_back_to_main_menu" type="Button" parent="win_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_g080o")
+theme_override_styles/hover = SubResource("StyleBoxTexture_8xlvj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vls1h")
+theme_override_styles/normal = SubResource("StyleBoxTexture_eddnf")
+text = "BACK TO MENU"
+
+[connection signal="body_entered" from="cpu_score_area" to="." method="_on_ball_enter_cpu_score_area"]
+[connection signal="body_entered" from="player_score_area" to="." method="_on_ball_enters_player_score_area"]
+[connection signal="timeout" from="start_ball_timer" to="." method="_on_start_ball_timer_timeout"]
+[connection signal="pressed" from="win_menu/btn_back_to_main_menu" to="." method="_on_btn_back_to_main_menu_pressed"]

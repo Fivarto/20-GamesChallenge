@@ -1,0 +1,308 @@
+[gd_scene load_steps=23 format=3 uid="uid://ceg68bnts22wk"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_o2486"]
+[ext_resource type="Texture2D" uid="uid://ctp88dvyq21w6" path="res://Assets/tenis_court.png" id="2_4aecg"]
+[ext_resource type="Texture2D" uid="uid://dnx7tjebpylp7" path="res://Assets/UI/Player1_Controls.png" id="2_kkp8h"]
+[ext_resource type="FontFile" uid="uid://ns7ywwfij86p" path="res://Assets/Fonts/PixelOperator8.ttf" id="3_bnv57"]
+[ext_resource type="Texture2D" uid="uid://n0xtbt7j6tm7" path="res://Assets/UI/button.png" id="3_qarmh"]
+[ext_resource type="Texture2D" uid="uid://bhv4bkv1s1cmc" path="res://Assets/UI/Player2_Controls.png" id="4_aqc8a"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_710pk"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.621524, 0.621524, 0.621524, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5lt1t"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.158472, 0.158472, 0.158472, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x7qnx"]
+texture = ExtResource("3_qarmh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jq556"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qjtbq"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_avdfc"]
+texture = ExtResource("3_qarmh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_01bkm"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r2odc"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_53soq"]
+texture = ExtResource("3_qarmh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0k4kr"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oy62m"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0m0fu"]
+texture = ExtResource("3_qarmh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0jrpt"]
+texture = ExtResource("3_qarmh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pno5a"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yeopw"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bl8hj"]
+texture = ExtResource("3_qarmh")
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_o2486")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(400, 180)
+texture = ExtResource("2_4aecg")
+
+[node name="main_menu_container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -20.0
+offset_right = 53.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="btn_start_game" type="Button" parent="main_menu_container"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/hover = SubResource("StyleBoxTexture_710pk")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5lt1t")
+theme_override_styles/normal = SubResource("StyleBoxTexture_x7qnx")
+text = "START GAME"
+
+[node name="btn_controls" type="Button" parent="main_menu_container"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jq556")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qjtbq")
+theme_override_styles/normal = SubResource("StyleBoxTexture_avdfc")
+text = "CONTROLS
+"
+
+[node name="btn_exit" type="Button" parent="main_menu_container"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/hover = SubResource("StyleBoxTexture_01bkm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_r2odc")
+theme_override_styles/normal = SubResource("StyleBoxTexture_53soq")
+text = "EXIT
+"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 16.0
+offset_right = -64.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/side_margin = 32
+current_tab = 2
+
+[node name="CONTROLS" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="sprt_p1_controls" type="Sprite2D" parent="TabContainer/CONTROLS"]
+position = Vector2(154, 189)
+texture = ExtResource("2_kkp8h")
+
+[node name="label_player1_controls" type="Label" parent="TabContainer/CONTROLS"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 88.0
+offset_right = 268.0
+offset_bottom = 111.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+text = "PLAYER 1 CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sprt_p2_controls" type="Sprite2D" parent="TabContainer/CONTROLS"]
+position = Vector2(513, 189)
+texture = ExtResource("4_aqc8a")
+
+[node name="label_player2_controls" type="Label" parent="TabContainer/CONTROLS"]
+layout_mode = 0
+offset_left = 401.0
+offset_top = 88.0
+offset_right = 627.0
+offset_bottom = 111.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+text = "PLAYER 2 CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CREDITS" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/CREDITS"]
+custom_minimum_size = Vector2(580, 300)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_right = 290.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_bnv57")
+text = "Jogo feito  em uma semana no desafio dos 20 jogos, pra treinar o dominio da base do desenvolvimento de jogos.
+
+Arte : @Fivarth_Pixel
+"
+
+[node name="Color Picker" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="player_1_color_picker_label" type="Label" parent="TabContainer/Color Picker"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 80.0
+offset_right = 226.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+text = "PLAYER 1 COLOR"
+
+[node name="player_1_color_picker" type="ColorPickerButton" parent="TabContainer/Color Picker"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 115.0
+offset_right = 150.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+color = Color(1, 1, 1, 1)
+
+[node name="player_1_color_picker_label2" type="Label" parent="TabContainer/Color Picker"]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 80.0
+offset_right = 627.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+text = "PLAYER 2 COLOR"
+
+[node name="player_2_color_picker" type="ColorPickerButton" parent="TabContainer/Color Picker"]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 115.0
+offset_right = 554.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+color = Color(1, 1, 1, 1)
+
+[node name="btn_exit_options" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -31.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BACK TO MENU"
+
+[node name="game_mode_menu" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -51.0
+offset_right = 90.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="btn_pve" type="Button" parent="game_mode_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0k4kr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_oy62m")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0m0fu")
+text = "P1 X CPU"
+
+[node name="btn_pvp" type="Button" parent="game_mode_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0jrpt")
+text = "P1 X P2"
+
+[node name="btn_back_to_menu" type="Button" parent="game_mode_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pno5a")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yeopw")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bl8hj")
+text = "BACK TO MENU"
+
+[connection signal="pressed" from="main_menu_container/btn_start_game" to="." method="_on_btn_start_game_pressed"]
+[connection signal="pressed" from="main_menu_container/btn_controls" to="." method="_on_btn_controls_pressed"]
+[connection signal="pressed" from="main_menu_container/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="color_changed" from="TabContainer/Color Picker/player_1_color_picker" to="." method="_on_player_1_color_picker_color_changed"]
+[connection signal="color_changed" from="TabContainer/Color Picker/player_2_color_picker" to="." method="_on_player_2_color_picker_color_changed"]
+[connection signal="pressed" from="btn_exit_options" to="." method="_on_btn_exit_options_pressed"]
+[connection signal="pressed" from="game_mode_menu/btn_pve" to="." method="_on_btn_pve_pressed"]
+[connection signal="pressed" from="game_mode_menu/btn_pvp" to="." method="_on_btn_pvp_pressed"]
+[connection signal="pressed" from="game_mode_menu/btn_back_to_menu" to="." method="_on_btn_back_to_menu_pressed"]
