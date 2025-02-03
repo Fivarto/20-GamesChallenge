@@ -111,8 +111,7 @@ theme_override_fonts/font = ExtResource("3_bnv57")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jq556")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qjtbq")
 theme_override_styles/normal = SubResource("StyleBoxTexture_avdfc")
-text = "CONTROLS
-"
+text = "OPTIONS"
 
 [node name="btn_exit" type="Button" parent="main_menu_container"]
 custom_minimum_size = Vector2(180, 32)
@@ -138,10 +137,9 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/side_margin = 32
-current_tab = 2
+current_tab = 0
 
 [node name="CONTROLS" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -175,10 +173,51 @@ text = "PLAYER 2 CONTROLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CREDITS" type="TabBar" parent="TabContainer"]
+[node name="Paddle Color" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="player_1_color_picker_label" type="Label" parent="TabContainer/Paddle Color"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 80.0
+offset_right = 226.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+text = "PLAYER 1 COLOR"
+
+[node name="player_1_color_picker" type="ColorPickerButton" parent="TabContainer/Paddle Color"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 115.0
+offset_right = 150.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+color = Color(1, 1, 1, 1)
+
+[node name="player_1_color_picker_label2" type="Label" parent="TabContainer/Paddle Color"]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 80.0
+offset_right = 627.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+text = "PLAYER 2 COLOR"
+
+[node name="player_2_color_picker" type="ColorPickerButton" parent="TabContainer/Paddle Color"]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 115.0
+offset_right = 554.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("3_bnv57")
+color = Color(1, 1, 1, 1)
+
+[node name="CREDITS" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/CREDITS"]
 custom_minimum_size = Vector2(580, 300)
@@ -197,47 +236,8 @@ theme_override_fonts/normal_font = ExtResource("3_bnv57")
 text = "Jogo feito  em uma semana no desafio dos 20 jogos, pra treinar o dominio da base do desenvolvimento de jogos.
 
 Arte : @Fivarth_Pixel
+Codigo: @Fivarth_Pixel
 "
-
-[node name="Color Picker" type="TabBar" parent="TabContainer"]
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="player_1_color_picker_label" type="Label" parent="TabContainer/Color Picker"]
-layout_mode = 0
-offset_left = 42.0
-offset_top = 80.0
-offset_right = 226.0
-offset_bottom = 103.0
-theme_override_fonts/font = ExtResource("3_bnv57")
-text = "PLAYER 1 COLOR"
-
-[node name="player_1_color_picker" type="ColorPickerButton" parent="TabContainer/Color Picker"]
-layout_mode = 0
-offset_left = 119.0
-offset_top = 115.0
-offset_right = 150.0
-offset_bottom = 146.0
-theme_override_fonts/font = ExtResource("3_bnv57")
-color = Color(1, 1, 1, 1)
-
-[node name="player_1_color_picker_label2" type="Label" parent="TabContainer/Color Picker"]
-layout_mode = 0
-offset_left = 443.0
-offset_top = 80.0
-offset_right = 627.0
-offset_bottom = 103.0
-theme_override_fonts/font = ExtResource("3_bnv57")
-text = "PLAYER 2 COLOR"
-
-[node name="player_2_color_picker" type="ColorPickerButton" parent="TabContainer/Color Picker"]
-layout_mode = 0
-offset_left = 523.0
-offset_top = 115.0
-offset_right = 554.0
-offset_bottom = 146.0
-theme_override_fonts/font = ExtResource("3_bnv57")
-color = Color(1, 1, 1, 1)
 
 [node name="btn_exit_options" type="Button" parent="."]
 visible = false
@@ -300,8 +300,8 @@ text = "BACK TO MENU"
 [connection signal="pressed" from="main_menu_container/btn_start_game" to="." method="_on_btn_start_game_pressed"]
 [connection signal="pressed" from="main_menu_container/btn_controls" to="." method="_on_btn_controls_pressed"]
 [connection signal="pressed" from="main_menu_container/btn_exit" to="." method="_on_btn_exit_pressed"]
-[connection signal="color_changed" from="TabContainer/Color Picker/player_1_color_picker" to="." method="_on_player_1_color_picker_color_changed"]
-[connection signal="color_changed" from="TabContainer/Color Picker/player_2_color_picker" to="." method="_on_player_2_color_picker_color_changed"]
+[connection signal="color_changed" from="TabContainer/Paddle Color/player_1_color_picker" to="." method="_on_player_1_color_picker_color_changed"]
+[connection signal="color_changed" from="TabContainer/Paddle Color/player_2_color_picker" to="." method="_on_player_2_color_picker_color_changed"]
 [connection signal="pressed" from="btn_exit_options" to="." method="_on_btn_exit_options_pressed"]
 [connection signal="pressed" from="game_mode_menu/btn_pve" to="." method="_on_btn_pve_pressed"]
 [connection signal="pressed" from="game_mode_menu/btn_pvp" to="." method="_on_btn_pvp_pressed"]

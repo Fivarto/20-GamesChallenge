@@ -26,10 +26,16 @@ func _ready():
 
 func _input(event):
 	
+	#SPACE TO START GAME
 	if Input.is_key_pressed(KEY_SPACE) and has_game_started == false:
 		start_ball_timer.start()
 		has_game_started = true
 		start_game_label.visible = false
+	
+	#P TO PAUSE
+	if Input.is_key_pressed(KEY_P) : 
+		$pause_menu.visible = true
+		get_tree().paused = true
 
 
 func _process(delta):
@@ -38,15 +44,17 @@ func _process(delta):
 	if player_score >= 3:
 		win_label.text = "CONGRATS PLAYER 1 WON"
 		win_label.visible = true
+		start_game_label.visible = false
 		win_menu.visible = true
-		get_tree().paused = true
+		has_game_started = true
 		
 	#PLAYER 2 || CPU WIN CONDITION
 	if cpu_score >= 3:
 		win_label.text = "CONGRATS CPU WON"
 		win_label.visible = true
+		start_game_label.visible = false
 		win_menu.visible = true
-		get_tree().paused = true
+		has_game_started = true
 
 #QUANDO BOLA ENTRA NA AREA DE PONTUAÇÃO DO CPU, A CPU GANHA UM PONTO
 #ATUALIZA O TEXTO DO SCORE LABEL DA CPU ADICIONANDO 1 AO PONTO
@@ -55,6 +63,8 @@ func _on_ball_enter_cpu_score_area(body):
 	#IF STATEMENT PRA GARANTIR QUE O OBJETO QUE ENTROU NA AREA TEM O NOME "BALL"
 	#IMPEDINDO QUE O LABEL E SCORE SEJA ATUALIZADOS CASO QUALQUER OUTRO OBJETO PASSE PELA AREA
 	if body.name == "Ball":
+		
+		body.play_score_sfx()
 		
 		#ADICIONA 1 AO CPU SCORE
 		cpu_score += 1
@@ -79,6 +89,9 @@ func _on_ball_enter_cpu_score_area(body):
 func _on_ball_enters_player_score_area(body):
 	#NOVAMENTE UM IF STATEMENT PRA QUE SÓ A BOLA ATIVE A PONTUAÇÃO PARA O PLAYER
 	if body.name == "Ball":
+		
+		body.play_score_sfx()
+		
 		#PLAYER SCORE RECEBE + 1 PONTO
 		player_score += 1
 		
@@ -99,7 +112,7 @@ func _on_ball_enters_player_score_area(body):
 
 
 
-#QUANDO O TIMER TERMINA 
+#TIMER PRA COMEÇAR O JOGO, QUANDO TERMINA INICIA A BOLA
 func _on_start_ball_timer_timeout():
 	
 	#VOLTA A VELOCIDADE DA BOLA PRA VELOCIDADE INICIAL E DÁ O "PONTAPÉ" PRA ELA VOLTAR A SE MEXER
@@ -108,12 +121,6 @@ func _on_start_ball_timer_timeout():
 	
 	
 
-
-func _on_btn_back_to_main_menu_pressed():
-	
-	restart_the_game_state()
-	get_tree().change_scene_to_file("res://Scenes/Menus/Main_Menu.tscn")
-
 func restart_the_game_state():
 	Global.gamemodePVE = false
 	Global.gamemodePVP = false
@@ -121,4 +128,38 @@ func restart_the_game_state():
 	player_score = 0
 	cpu_score = 0
 	
+
+
+
+#WIN MENU SIGNALS
+
+func _on_btn_restart_game_pressed() -> void:
+	player_score = 0
+	cpu_score = 0
+	
+	win_menu.visible = false
+	win_label.visible = false
+	start_game_label.visible = true
+	
+	player_score_label.text = str(player_score)
+	cpu_score_label.text = str(cpu_score)
+	
+	
+	has_game_started = false
+
+func _on_btn_back_to_main_menu_pressed():
+	
+	restart_the_game_state()
+	get_tree().change_scene_to_file("res://Scenes/Menus/Main_Menu.tscn")
+
+
+
+
+
+#PAUSE MENU SIGNALS
+func _on_btn_resume_game_pressed() -> void:
 	get_tree().paused = false
+	$pause_menu.visible = false
+
+func _on_btn_exit_game_pressed() -> void:
+	get_tree().quit()

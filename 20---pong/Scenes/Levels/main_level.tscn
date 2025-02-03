@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c372olxibms5e"]
+[gd_scene load_steps=19 format=3 uid="uid://c372olxibms5e"]
 
 [ext_resource type="Texture2D" uid="uid://ctp88dvyq21w6" path="res://Assets/tenis_court.png" id="1_ib1c2"]
 [ext_resource type="Script" path="res://Scripts/Levels/main_level.gd" id="1_klggt"]
@@ -31,6 +31,17 @@ texture = ExtResource("7_5agqj")
 texture = ExtResource("7_5agqj")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eddnf"]
+texture = ExtResource("7_5agqj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2kc16"]
+texture = ExtResource("7_5agqj")
+modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p0ti7"]
+texture = ExtResource("7_5agqj")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_waiuf"]
 texture = ExtResource("7_5agqj")
 
 [node name="Main_Level" type="Node2D"]
@@ -115,15 +126,14 @@ offset_bottom = 158.0
 theme_override_fonts/font = ExtResource("4_g080o")
 text = "press space to start the game"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="SHADER_CRT" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="CanvasLayer"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="SHADER_CRT"]
 material = SubResource("ShaderMaterial_2ivua")
 mesh = SubResource("QuadMesh_alhf3")
 
 [node name="win_menu" type="VBoxContainer" parent="."]
-process_mode = 2
 visible = false
 offset_left = 311.0
 offset_top = 201.0
@@ -154,7 +164,45 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_vls1h")
 theme_override_styles/normal = SubResource("StyleBoxTexture_eddnf")
 text = "BACK TO MENU"
 
+[node name="pause_menu" type="VBoxContainer" parent="."]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 313.0
+offset_top = 161.0
+offset_right = 493.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="btn_resume_game" type="Button" parent="pause_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_g080o")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2kc16")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_p0ti7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_waiuf")
+text = "RESUME"
+
+[node name="btn_exit_game" type="Button" parent="pause_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_g080o")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2kc16")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_p0ti7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_waiuf")
+text = "EXIT"
+
 [connection signal="body_entered" from="cpu_score_area" to="." method="_on_ball_enter_cpu_score_area"]
 [connection signal="body_entered" from="player_score_area" to="." method="_on_ball_enters_player_score_area"]
 [connection signal="timeout" from="start_ball_timer" to="." method="_on_start_ball_timer_timeout"]
+[connection signal="pressed" from="win_menu/btn_restart_game" to="." method="_on_btn_restart_game_pressed"]
 [connection signal="pressed" from="win_menu/btn_back_to_main_menu" to="." method="_on_btn_back_to_main_menu_pressed"]
+[connection signal="pressed" from="pause_menu/btn_resume_game" to="." method="_on_btn_resume_game_pressed"]
+[connection signal="pressed" from="pause_menu/btn_exit_game" to="." method="_on_btn_exit_game_pressed"]

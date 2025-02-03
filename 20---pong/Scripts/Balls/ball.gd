@@ -6,6 +6,10 @@ var ball_direction: Vector2
 const BALL_ACCELERATION: int = 20
 const MAX_Y_VECTOR: float = 0.6
 
+@onready var ball_bump_sfx: AudioStreamPlayer2D = $paddle_bump_sfx
+@onready var score_sfx: AudioStreamPlayer2D = $score_sfx
+
+
 func _ready():
 	
 	pass
@@ -30,9 +34,14 @@ func _physics_process(delta):
 		
 		if collider.name == "Player1" || collider.name == "Player2":
 			
-			
+			#ACELERA A BOLA 
 			ball_speed += BALL_ACCELERATION
 			
+			#SOM AO REBATER A BOLA
+			ball_bump_sfx.pitch_scale = randf_range(0.9 , 1.2)
+			ball_bump_sfx.play()
+			
+			#"QUICA" A BOLA PRO OUTRO LADO DO COLLIDER
 			ball_direction = balls_new_direction(collider)
 			
 		else:
@@ -67,3 +76,6 @@ func balls_new_direction(collider):
 	new_direction.y = (new_direction_distance / (96 / 2)) * MAX_Y_VECTOR
 	
 	return new_direction
+
+func play_score_sfx():
+	score_sfx.play()

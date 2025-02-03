@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://3gpiyvl7y4bl"]
+[gd_scene load_steps=6 format=3 uid="uid://3gpiyvl7y4bl"]
 
 [ext_resource type="Texture2D" uid="uid://c6aq0lshit06p" path="res://Assets/Balls/Ball_Green_Classic.png" id="1_cmvog"]
 [ext_resource type="Script" path="res://Scripts/Balls/ball.gd" id="1_pkre7"]
+[ext_resource type="AudioStream" uid="uid://cexosu7gfip1h" path="res://Assets/Sounds/Blip2.wav" id="3_xdl0k"]
+[ext_resource type="AudioStream" uid="uid://dpgddopcpq8lo" path="res://Assets/Sounds/Coin5.wav" id="4_lf24f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tdspp"]
 
@@ -13,3 +15,9 @@ texture = ExtResource("1_cmvog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tdspp")
+
+[node name="paddle_bump_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_xdl0k")
+
+[node name="score_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_lf24f")
