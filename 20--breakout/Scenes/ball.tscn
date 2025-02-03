@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://blcqvyhqmclyu"]
+
+[ext_resource type="Script" path="res://Scripts/ball.gd" id="1_lhyet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vaqv1"]
+radius = 8.0
+
+[node name="Ball" type="CharacterBody2D"]
+script = ExtResource("1_lhyet")
+
+[node name="BallBody" type="ColorRect" parent="."]
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="CollisionBall" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_vaqv1")
