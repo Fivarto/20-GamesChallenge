@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c372olxibms5e"]
+[gd_scene load_steps=20 format=3 uid="uid://c372olxibms5e"]
 
 [ext_resource type="Texture2D" uid="uid://ctp88dvyq21w6" path="res://Assets/tenis_court.png" id="1_ib1c2"]
 [ext_resource type="Script" path="res://Scripts/Levels/main_level.gd" id="1_klggt"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://ns7ywwfij86p" path="res://Assets/Fonts/PixelOperator8.ttf" id="4_g080o"]
 [ext_resource type="Shader" path="res://Shaders/ctr_shadder.gdshader" id="6_7tw5u"]
 [ext_resource type="Texture2D" uid="uid://n0xtbt7j6tm7" path="res://Assets/UI/button.png" id="7_5agqj"]
+[ext_resource type="AudioStream" uid="uid://c3km0advsq1ac" path="res://Assets/Sounds/tap.wav" id="8_okca7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jf3md"]
 size = Vector2(809.375, 20)
@@ -189,6 +190,16 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_p0ti7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_waiuf")
 text = "RESUME"
 
+[node name="btn_back_to_menu" type="Button" parent="pause_menu"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_g080o")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2kc16")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_p0ti7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_waiuf")
+text = "BACK TO MENU"
+
 [node name="btn_exit_game" type="Button" parent="pause_menu"]
 custom_minimum_size = Vector2(180, 32)
 layout_mode = 2
@@ -199,10 +210,20 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_p0ti7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_waiuf")
 text = "EXIT"
 
+[node name="button_sound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("8_okca7")
+
 [connection signal="body_entered" from="cpu_score_area" to="." method="_on_ball_enter_cpu_score_area"]
 [connection signal="body_entered" from="player_score_area" to="." method="_on_ball_enters_player_score_area"]
 [connection signal="timeout" from="start_ball_timer" to="." method="_on_start_ball_timer_timeout"]
+[connection signal="mouse_entered" from="win_menu/btn_restart_game" to="." method="_on_btn_restart_game_mouse_entered"]
 [connection signal="pressed" from="win_menu/btn_restart_game" to="." method="_on_btn_restart_game_pressed"]
+[connection signal="mouse_entered" from="win_menu/btn_back_to_main_menu" to="." method="_on_btn_back_to_main_menu_mouse_entered"]
 [connection signal="pressed" from="win_menu/btn_back_to_main_menu" to="." method="_on_btn_back_to_main_menu_pressed"]
+[connection signal="mouse_entered" from="pause_menu/btn_resume_game" to="." method="_on_btn_resume_game_mouse_entered"]
 [connection signal="pressed" from="pause_menu/btn_resume_game" to="." method="_on_btn_resume_game_pressed"]
+[connection signal="mouse_entered" from="pause_menu/btn_back_to_menu" to="." method="_on_btn_back_to_menu_mouse_entered"]
+[connection signal="pressed" from="pause_menu/btn_back_to_menu" to="." method="_on_btn_back_to_menu_pressed"]
+[connection signal="mouse_entered" from="pause_menu/btn_exit_game" to="." method="_on_btn_exit_game_mouse_entered"]
 [connection signal="pressed" from="pause_menu/btn_exit_game" to="." method="_on_btn_exit_game_pressed"]

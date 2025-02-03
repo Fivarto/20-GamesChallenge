@@ -46,6 +46,8 @@ func _physics_process(delta):
 			
 		else:
 			
+			ball_bump_sfx.pitch_scale = randf_range(0.5 , 0.7)
+			ball_bump_sfx.play()
 			ball_direction = ball_direction.bounce(collision.get_normal())
 	
 

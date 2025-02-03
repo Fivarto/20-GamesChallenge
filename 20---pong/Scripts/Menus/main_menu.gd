@@ -5,11 +5,11 @@ extends Control
 @onready var game_mode_menu = $game_mode_menu
 @onready var main_menu_container = $main_menu_container
 
-@onready var player_1_color_picker = $"TabContainer/Color Picker/player_1_color_picker"
-@onready var player_2_color_picker = $"TabContainer/Color Picker/player_2_color_picker"
+@onready var player_1_color_picker = $"TabContainer/Paddle Color/player_1_color_picker"
+@onready var player_2_color_picker = $"TabContainer/Paddle Color/player_2_color_picker"
 
-@onready var label_color_1 = $"TabContainer/Color Picker/player_1_color_picker_label"
-@onready var label_color_2 = $"TabContainer/Color Picker/player_1_color_picker_label2"
+@onready var label_color_1 = $"TabContainer/Paddle Color/player_1_color_picker_label"
+@onready var label_color_2 = $"TabContainer/Paddle Color/player_1_color_picker_label2"
 
 
 #			 -----MAIN MENU -------
@@ -71,3 +71,34 @@ func _on_btn_back_to_menu_pressed():
 	
 	main_menu_container.visible = true
 	game_mode_menu.visible = false
+
+
+#BUTTON SOUNDS
+
+func play_button_sound():
+	$button_sfx.pitch_scale = randf_range(0.9 , 1.1)
+	$button_sfx.play()
+
+#MAIN MENU
+func _on_btn_start_game_mouse_entered():
+	play_button_sound()
+
+func _on_btn_controls_mouse_entered():
+	play_button_sound()
+
+func _on_btn_exit_mouse_entered():
+	play_button_sound()
+
+#OPTIONS MENU
+func _on_btn_exit_options_mouse_entered():
+	play_button_sound()
+
+#GAMEMODE MENU
+func _on_btn_pve_mouse_entered():
+	play_button_sound()
+
+func _on_btn_pvp_mouse_entered():
+	play_button_sound()
+
+func _on_btn_back_to_menu_mouse_entered():
+	play_button_sound()

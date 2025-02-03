@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ceg68bnts22wk"]
+[gd_scene load_steps=26 format=3 uid="uid://ceg68bnts22wk"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_o2486"]
 [ext_resource type="Texture2D" uid="uid://ctp88dvyq21w6" path="res://Assets/tenis_court.png" id="2_4aecg"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://ns7ywwfij86p" path="res://Assets/Fonts/PixelOperator8.ttf" id="3_bnv57"]
 [ext_resource type="Texture2D" uid="uid://n0xtbt7j6tm7" path="res://Assets/UI/button.png" id="3_qarmh"]
 [ext_resource type="Texture2D" uid="uid://bhv4bkv1s1cmc" path="res://Assets/UI/Player2_Controls.png" id="4_aqc8a"]
+[ext_resource type="AudioStream" uid="uid://c3km0advsq1ac" path="res://Assets/Sounds/tap.wav" id="7_u4qwp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_710pk"]
 texture = ExtResource("3_qarmh")
@@ -50,6 +51,14 @@ modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0m0fu"]
 texture = ExtResource("3_qarmh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3qkta"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u5qak"]
+texture = ExtResource("3_qarmh")
+modulate_color = Color(0.156863, 0.156863, 0.156863, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0jrpt"]
 texture = ExtResource("3_qarmh")
@@ -284,6 +293,8 @@ custom_minimum_size = Vector2(180, 32)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_bnv57")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3qkta")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_u5qak")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0jrpt")
 text = "P1 X P2"
 
@@ -297,12 +308,23 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_yeopw")
 theme_override_styles/normal = SubResource("StyleBoxTexture_bl8hj")
 text = "BACK TO MENU"
 
+[node name="button_sfx" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(310, 128)
+stream = ExtResource("7_u4qwp")
+
+[connection signal="mouse_entered" from="main_menu_container/btn_start_game" to="." method="_on_btn_start_game_mouse_entered"]
 [connection signal="pressed" from="main_menu_container/btn_start_game" to="." method="_on_btn_start_game_pressed"]
+[connection signal="mouse_entered" from="main_menu_container/btn_controls" to="." method="_on_btn_controls_mouse_entered"]
 [connection signal="pressed" from="main_menu_container/btn_controls" to="." method="_on_btn_controls_pressed"]
+[connection signal="mouse_entered" from="main_menu_container/btn_exit" to="." method="_on_btn_exit_mouse_entered"]
 [connection signal="pressed" from="main_menu_container/btn_exit" to="." method="_on_btn_exit_pressed"]
 [connection signal="color_changed" from="TabContainer/Paddle Color/player_1_color_picker" to="." method="_on_player_1_color_picker_color_changed"]
 [connection signal="color_changed" from="TabContainer/Paddle Color/player_2_color_picker" to="." method="_on_player_2_color_picker_color_changed"]
+[connection signal="mouse_entered" from="btn_exit_options" to="." method="_on_btn_exit_options_mouse_entered"]
 [connection signal="pressed" from="btn_exit_options" to="." method="_on_btn_exit_options_pressed"]
+[connection signal="mouse_entered" from="game_mode_menu/btn_pve" to="." method="_on_btn_pve_mouse_entered"]
 [connection signal="pressed" from="game_mode_menu/btn_pve" to="." method="_on_btn_pve_pressed"]
+[connection signal="mouse_entered" from="game_mode_menu/btn_pvp" to="." method="_on_btn_pvp_mouse_entered"]
 [connection signal="pressed" from="game_mode_menu/btn_pvp" to="." method="_on_btn_pvp_pressed"]
+[connection signal="mouse_entered" from="game_mode_menu/btn_back_to_menu" to="." method="_on_btn_back_to_menu_mouse_entered"]
 [connection signal="pressed" from="game_mode_menu/btn_back_to_menu" to="." method="_on_btn_back_to_menu_pressed"]

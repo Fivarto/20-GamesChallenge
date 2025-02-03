@@ -11,6 +11,9 @@ extends Node2D
 
 @onready var win_menu = $win_menu
 
+@onready var button_sound = $button_sound
+
+
 var player_score: int = 0 # SCORE INICIAL DO PLAYER
 var cpu_score: int = 0 # SCORE INICIAL DA CPU OU PLAYER 2
 
@@ -161,5 +164,33 @@ func _on_btn_resume_game_pressed() -> void:
 	get_tree().paused = false
 	$pause_menu.visible = false
 
+func _on_btn_back_to_menu_pressed():
+	
+	restart_the_game_state()
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/Menus/Main_Menu.tscn")
+	
+
 func _on_btn_exit_game_pressed() -> void:
 	get_tree().quit()
+
+#BUTTON SOUNDS SIGNALS
+func play_button_sounds_on_main_level():
+	button_sound.pitch_scale = randf_range(0.9, 1.1)
+	button_sound.play()
+
+
+func _on_btn_restart_game_mouse_entered():
+	play_button_sounds_on_main_level()
+
+func _on_btn_back_to_main_menu_mouse_entered():
+	play_button_sounds_on_main_level()
+
+func _on_btn_resume_game_mouse_entered():
+	play_button_sounds_on_main_level()
+
+func _on_btn_back_to_menu_mouse_entered():
+	play_button_sounds_on_main_level()
+
+func _on_btn_exit_game_mouse_entered():
+	play_button_sounds_on_main_level()
