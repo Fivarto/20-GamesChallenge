@@ -18,7 +18,7 @@ func _ready():
 func _input(event):
 	
 	#START BALL MOVEMENT
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_key_pressed(KEY_SPACE) and Global.player_life > 0:
 		start_ball_movement()
 
 func start_ball_movement():

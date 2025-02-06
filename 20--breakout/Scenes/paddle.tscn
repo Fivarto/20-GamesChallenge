@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu7ruocqfjoco"]
+[gd_scene load_steps=10 format=3 uid="uid://bu7ruocqfjoco"]
 
 [ext_resource type="Script" path="res://Scripts/paddle.gd" id="1_wgioo"]
 [ext_resource type="Texture2D" uid="uid://we5u76ae6tgt" path="res://Assets/Player/paddle_sword.png" id="2_v64cx"]
@@ -34,6 +34,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 5), Vector2(1, 7), Vector2(0, 5)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_s28i3"]
 length = 0.001
@@ -60,6 +72,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_wqwi6"]
@@ -98,6 +122,13 @@ _data = {
 "bump_top": SubResource("Animation_fykwx")
 }
 
+[sub_resource type="Curve" id="Curve_ig5du"]
+_data = [Vector2(0.0168539, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), -0.0850454, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_1qfxw"]
+colors = PackedColorArray(1, 1, 0.0156863, 1, 0.831373, 0.294118, 0.137255, 1)
+
 [node name="Paddle" type="StaticBody2D"]
 script = ExtResource("1_wgioo")
 
@@ -113,3 +144,21 @@ shape = SubResource("RectangleShape2D_06kwu")
 libraries = {
 "": SubResource("AnimationLibrary_n1wem")
 }
+
+[node name="SwordParticles" type="CPUParticles2D" parent="."]
+position = Vector2(-24, -4)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+linear_accel_min = -66.67
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_ig5du")
+color_ramp = SubResource("Gradient_1qfxw")
