@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 @onready var sprite_paddle = $SpritePaddle
+@onready var sword_animation = $sword_animation
 
 var paddle_speed: float = 350.0
 
@@ -21,3 +22,9 @@ func _process(delta):
 		position.x += paddle_speed * delta
 	
 	position.x = clamp(position.x, 0 + (paddle_witdh / 2) , get_viewport().size.x - (paddle_witdh / 2))
+
+func play_top_bump():
+	sword_animation.play("bump_top")
+
+func play_bottom_bump():
+	sword_animation.play("bump_bottom")

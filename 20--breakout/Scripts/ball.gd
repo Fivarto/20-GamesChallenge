@@ -9,10 +9,20 @@ var paddle_width: float = 64.0
 
 const MAX_X_VECTOR : float = 0.6
 
-const BALL_ACCELERATION: float = 5
+const BALL_ACCELERATION: float = 50
 
 func _ready():
-	ball_direction = Vector2(0, 1)
+	#ball_direction = Vector2(0, 1)
+	pass
+
+func _input(event):
+	
+	#START BALL MOVEMENT
+	if Input.is_key_pressed(KEY_SPACE):
+		start_ball_movement()
+
+func start_ball_movement():
+	ball_direction = Vector2(randf_range(-1 , 1), 1)
 
 func _physics_process(delta):
 	
@@ -28,7 +38,7 @@ func _physics_process(delta):
 		collider = collision.get_collider()
 		
 		if collider.name == "Player":
-			ball_speed += BALL_ACCELERATION
+			#ball_speed += BALL_ACCELERATION
 			ball_direction = balls_new_direction(collider)
 		
 		if collider.is_in_group("Blocks"):
@@ -45,6 +55,12 @@ func balls_new_direction(collider):
 	var new_direction_distance = ball_x_position - paddle_x
 	var new_direction := Vector2()
 	
+	
+	if new_direction_distance > 0:
+		collider.play_bottom_bump()
+	if new_direction_distance < 0:
+		collider.play_top_bump()
+	
 	if ball_direction.y > 0:
 		new_direction.y = 1
 		
@@ -55,5 +71,10 @@ func balls_new_direction(collider):
 	return new_direction
 
 
+
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	
 	position = get_viewport().size / 2
+	ball_direction = Vector2(0, 0)
+	
+	Global.player_life -= 1

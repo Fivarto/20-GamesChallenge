@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu7ruocqfjoco"]
+[gd_scene load_steps=8 format=3 uid="uid://bu7ruocqfjoco"]
 
 [ext_resource type="Script" path="res://Scripts/paddle.gd" id="1_wgioo"]
 [ext_resource type="Texture2D" uid="uid://we5u76ae6tgt" path="res://Assets/Player/paddle_sword.png" id="2_v64cx"]
@@ -6,8 +6,99 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_06kwu"]
 size = Vector2(96, 15)
 
+[sub_resource type="Animation" id="Animation_fykwx"]
+resource_name = "bump_top"
+length = 0.16
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpritePaddle:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1589),
+"transitions": PackedFloat32Array(2.5, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpritePaddle:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1589),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(1, 7), Vector2(0, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_s28i3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpritePaddle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpritePaddle:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_wqwi6"]
+resource_name = "bump_bottom"
+length = 0.18
+step = 0.003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpritePaddle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0840841, 0.18),
+"transitions": PackedFloat32Array(2.5, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpritePaddle:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0840841, 0.18018),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(-1, 7), Vector2(0, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1wem"]
+_data = {
+"RESET": SubResource("Animation_s28i3"),
+"bump_bottom": SubResource("Animation_wqwi6"),
+"bump_top": SubResource("Animation_fykwx")
+}
+
 [node name="Paddle" type="StaticBody2D"]
-position = Vector2(157, 692)
 script = ExtResource("1_wgioo")
 
 [node name="SpritePaddle" type="Sprite2D" parent="."]
@@ -17,3 +108,8 @@ texture = ExtResource("2_v64cx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_06kwu")
+
+[node name="sword_animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n1wem")
+}
