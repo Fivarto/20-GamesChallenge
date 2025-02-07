@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var ball_speed: float = 150.0
+var ball_speed: float = 275.0
 var ball_direction: Vector2
 
 var ball_rotation_speed: float = 0.05

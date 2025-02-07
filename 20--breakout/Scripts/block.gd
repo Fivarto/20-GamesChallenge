@@ -6,6 +6,7 @@ extends StaticBody2D
 @onready var sprite_array_test = $SpriteArrayTest
 @onready var particles = $Particles
 
+@onready var hurt_sound = $HurtSound
 
 
 func _ready():
@@ -15,15 +16,18 @@ func _ready():
 func get_damaged():
 	
 	particles.emitting = true
-	
 	block_life -= 1
 	
 	if block_life >= 1:
+		hurt_sound.play()
 		Global.player_current_score += 1
-		print(Global.player_current_score)
 		
 		
 	else:
+		
+		hurt_sound.play()
+		await hurt_sound.finished
+		
+		Global.enemies_on_screen -= 1
 		queue_free()
 		
-	particles.emitting = false

@@ -1,10 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://dr3suxp75vjxb"]
+[gd_scene load_steps=34 format=3 uid="uid://dr3suxp75vjxb"]
 
 [ext_resource type="Script" path="res://Scripts/block.gd" id="1_v5s8g"]
 [ext_resource type="Texture2D" uid="uid://dpop8q5nbbh7s" path="res://Assets/Enemies/Slimes/slime_idle.png" id="2_5ijvu"]
 [ext_resource type="Texture2D" uid="uid://ps8qt451vmub" path="res://Assets/Enemies/Slimes/slime_blue_idle.png" id="2_20it0"]
 [ext_resource type="Texture2D" uid="uid://bblc0mm3igilr" path="res://Assets/Enemies/Slimes/slime_red_idle.png" id="3_bfm7e"]
-[ext_resource type="Texture2D" uid="uid://b23yt2ktpf7vc" path="res://Assets/Particles/green_spot.png" id="5_urusu"]
+[ext_resource type="AudioStream" uid="uid://shmoib6escyu" path="res://Assets/SFX/hurt1.wav" id="5_uat3n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1sgli"]
 atlas = ExtResource("2_5ijvu")
@@ -189,8 +189,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1u7j"]
 size = Vector2(48, 48)
 
-[sub_resource type="Gradient" id="Gradient_wpghh"]
-colors = PackedColorArray(0.120211, 0.484216, 0.531671, 1, 1, 1, 1, 1)
+[sub_resource type="Curve" id="Curve_ig5du"]
+_data = [Vector2(0.0168539, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), -0.0850454, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_1qfxw"]
+colors = PackedColorArray(0.2, 1, 0.0156863, 1, 0.101961, 0.211765, 0.364706, 1)
 
 [node name="Block" type="StaticBody2D" groups=["Blocks"]]
 script = ExtResource("1_v5s8g")
@@ -206,7 +210,7 @@ color = Color(0.0784314, 0.196078, 0.219608, 0.572549)
 visible = false
 sprite_frames = SubResource("SpriteFrames_i3g18")
 autoplay = "default"
-frame_progress = 0.366746
+frame_progress = 0.763824
 
 [node name="SpriteArrayTest" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6v742")
@@ -218,9 +222,19 @@ shape = SubResource("RectangleShape2D_q1u7j")
 
 [node name="Particles" type="CPUParticles2D" parent="."]
 emitting = false
-lifetime = 0.2
-texture = ExtResource("5_urusu")
-emission_shape = 1
-emission_sphere_radius = 15.0
-initial_velocity_max = 10.0
-color_ramp = SubResource("Gradient_wpghh")
+amount = 10
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_ig5du")
+color_ramp = SubResource("Gradient_1qfxw")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_uat3n")
