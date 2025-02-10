@@ -10,6 +10,7 @@ extends StaticBody2D
 
 
 func _ready():
+	self.add_to_group("inimigos")
 	sprite_array_test.sprite_frames = texture_sprite[randi_range(0, 2)]
 	sprite_array_test.play("default")
 
@@ -21,7 +22,6 @@ func get_damaged():
 	if block_life >= 1:
 		hurt_sound.play()
 		Global.player_current_score += 1
-		
 		
 	else:
 		

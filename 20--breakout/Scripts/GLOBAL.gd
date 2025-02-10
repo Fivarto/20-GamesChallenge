@@ -6,9 +6,8 @@ var player_highest_score: int
 var player_life: int = 3
 
 var enemies_on_screen: int = 1
-var max_enemies_on_level: int = 18
+var max_enemies_on_level: int = 2
 
-var current_level: int
 
 func _ready():
 	load_high_score()

@@ -3,19 +3,25 @@ extends Node2D
 @onready var player_current_score = $PlayerCurrentScore
 @onready var player_highest_score = $PlayerHighestScore
 
+@onready var new_wave_timer: Timer = $NewWaveTimer
 
 @onready var player_life_displayer = $PlayerLifeDisplayer
+
+@onready var spawner: Node2D = $SpawnPoints/Spawner
+
+var spawning_new_wave: bool = false
+
 
 
 func _process(delta):
 	
+	var inimigos = get_tree().get_nodes_in_group("inimigos")
+	
+	if inimigos.size() == 0:
+		spawner.spawn_enemy()
+	
 	#SE A QUANTIDADE DE INIMIGOS EM TELA FOR 1(EQUIVALENTE A 0) 
 	#PASSAR PRO PROXIMO NIVEL E SPAWNAR MAIS INIMIGOS
-	if Global.enemies_on_screen == 1:
-		#SPAWNAR INIMIGOS 
-		pass
-	
-	
 	
 	player_current_score.text = str(Global.player_current_score)
 	player_highest_score.text = str(Global.player_highest_score)
