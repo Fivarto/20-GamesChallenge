@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://e6i5macg3q8c"
+path="res://.godot/imported/Chill Plains.mp3-46852de3fec4ffa6d8d690e1061521b1.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Album/Album/Chill Plains.mp3"
+dest_files=["res://.godot/imported/Chill Plains.mp3-46852de3fec4ffa6d8d690e1061521b1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

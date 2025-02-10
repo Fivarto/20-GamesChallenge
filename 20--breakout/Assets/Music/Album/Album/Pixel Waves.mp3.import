@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://camnty35c0imo"
+path="res://.godot/imported/Pixel Waves.mp3-0b53ece2801cdbb8f2905aeaf5ed141d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Album/Album/Pixel Waves.mp3"
+dest_files=["res://.godot/imported/Pixel Waves.mp3-0b53ece2801cdbb8f2905aeaf5ed141d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

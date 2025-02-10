@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://blcqvyhqmclyu"]
+[gd_scene load_steps=6 format=3 uid="uid://blcqvyhqmclyu"]
 
 [ext_resource type="Script" path="res://Scripts/ball.gd" id="1_lhyet"]
 [ext_resource type="Texture2D" uid="uid://yxyquo55vg1g" path="res://Assets/Player/fire_ball.png" id="2_bdn6l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vaqv1"]
 radius = 13.0
+
+[sub_resource type="Curve" id="Curve_ig5du"]
+_data = [Vector2(0.0168539, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), -0.0850454, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_3vywx"]
+colors = PackedColorArray(1, 0.72549, 0, 1, 0.713726, 0.313726, 0.4, 1)
 
 [node name="Ball" type="CharacterBody2D"]
 script = ExtResource("1_lhyet")
@@ -16,5 +23,20 @@ texture = ExtResource("2_bdn6l")
 shape = SubResource("CircleShape2D_vaqv1")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+lifetime = 0.5
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(5, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 80.0
+linear_accel_min = -66.67
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_ig5du")
+color_ramp = SubResource("Gradient_3vywx")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

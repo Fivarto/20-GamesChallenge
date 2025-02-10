@@ -20,7 +20,8 @@ func spawn_enemy():
 	Global.enemies_on_screen += 1
 	
 	if enemy_slime:
-		for i in range(enemy_position_list.size()):
+		
+		for i in range(Global.max_enemies_on_level):
 			
 			var enemy_instance = enemy_slime.instantiate()
 			

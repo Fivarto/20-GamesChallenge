@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://ds5bfog3u2hsc"]
+[gd_scene load_steps=35 format=4 uid="uid://ds5bfog3u2hsc"]
 
 [ext_resource type="PackedScene" uid="uid://blcqvyhqmclyu" path="res://Scenes/ball.tscn" id="1_sesrp"]
 [ext_resource type="Script" path="res://Scripts/main_level.gd" id="1_x6svs"]
@@ -6,7 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://be6qtwmqy0d65" path="res://Assets/TileSets/Floor.png" id="2_167ao"]
 [ext_resource type="FontFile" uid="uid://psgr88vqsxb0" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="5_biwdy"]
 [ext_resource type="PackedScene" uid="uid://dtsgsjrd18mnf" path="res://Scenes/spawner.tscn" id="6_0eaju"]
+[ext_resource type="AudioStream" uid="uid://dq526gnnkvr56" path="res://Assets/Music/Album/Album/Mystic Town.mp3" id="8_6eud1"]
 [ext_resource type="Texture2D" uid="uid://ck3vpmwsjbiys" path="res://Assets/UI/player_health_spritesheet.png" id="8_d134t"]
+[ext_resource type="Texture2D" uid="uid://deeso1taxubd3" path="res://Assets/UI/Screens/GameOver.png" id="9_u2o37"]
+[ext_resource type="Texture2D" uid="uid://dniw8vv2vgf20" path="res://Assets/UI/button_sprite_sheets/button_exit1.png" id="9_wqxlt"]
+[ext_resource type="Texture2D" uid="uid://bq0hji6t0trms" path="res://Assets/UI/button_sprite_sheets/button_exit3.png" id="10_xnqym"]
+[ext_resource type="Texture2D" uid="uid://4oc3r0qeimiq" path="res://Assets/UI/button_sprite_sheets/button_exit4.png" id="11_akb60"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0t4qm"]
 texture = ExtResource("2_167ao")
@@ -161,6 +166,63 @@ texture_region_size = Vector2i(48, 48)
 tile_size = Vector2i(48, 48)
 sources/2 = SubResource("TileSetAtlasSource_0t4qm")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch3wy"]
+atlas = ExtResource("9_u2o37")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5al1"]
+atlas = ExtResource("9_u2o37")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyjuc"]
+atlas = ExtResource("9_u2o37")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihu28"]
+atlas = ExtResource("9_u2o37")
+region = Rect2(240, 0, 80, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_omuyq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch3wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5al1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyjuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihu28")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3332s"]
+texture = ExtResource("9_wqxlt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7gbp"]
+texture = ExtResource("10_xnqym")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dpr08"]
+texture = ExtResource("11_akb60")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6aryo"]
+texture = ExtResource("9_wqxlt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xmmv7"]
+texture = ExtResource("10_xnqym")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kkwry"]
+texture = ExtResource("11_akb60")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xik2"]
+texture = ExtResource("9_wqxlt")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jg0ed"]
 size = Vector2(20, 720)
 
@@ -170,36 +232,36 @@ size = Vector2(20, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fo52"]
 size = Vector2(360, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qil0w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8prvi"]
 atlas = ExtResource("8_d134t")
-region = Rect2(0, 0, 69, 21)
+region = Rect2(171, 0, 57, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_32qgi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebywj"]
 atlas = ExtResource("8_d134t")
-region = Rect2(69, 0, 69, 21)
+region = Rect2(114, 0, 57, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjbj4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw463"]
 atlas = ExtResource("8_d134t")
-region = Rect2(138, 0, 69, 21)
+region = Rect2(57, 0, 57, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dbcco"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nydft"]
 atlas = ExtResource("8_d134t")
-region = Rect2(207, 0, 69, 21)
+region = Rect2(0, 0, 57, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ubt1x"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qil0w")
+"texture": SubResource("AtlasTexture_8prvi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_32qgi")
+"texture": SubResource("AtlasTexture_ebywj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wjbj4")
+"texture": SubResource("AtlasTexture_hw463")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dbcco")
+"texture": SubResource("AtlasTexture_nydft")
 }],
 "loop": true,
 "name": &"default",
@@ -212,6 +274,53 @@ script = ExtResource("1_x6svs")
 [node name="TM_Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAAAAgAHAAUAAAAAAAEAAgAHAAUAAAAAAAIAAgAJAAUAAAAAAAMAAgAJAAUAAAAAAAQAAgAHAAUAAAAAAAUAAgAHAAUAAAAAAAYAAgAHAAUAAAAAAAcAAgAHAAUAAAAAAAgAAgAJAAUAAAAAAAkAAgAJAAUAAAAAAAoAAgAJAAUAAAAAAAsAAgAIAAUAAAAAAAwAAgAIAAUAAAAAAA0AAgAHAAUAAAAAAA4AAgAHAAUAAAABAAAAAgAAAAkAAAABAAEAAgAAAAoAAAABAAIAAgAAAAoAAAABAAMAAgAAAAoAAAABAAQAAgAAAAoAAAABAAUAAgAAAAoAAAABAAYAAgAAAAoAAAABAAcAAgAAAAoAAAABAAgAAgAAAAoAAAABAAkAAgAAAAoAAAABAAoAAgAAAAoAAAABAAsAAgAAAAoAAAABAAwAAgAAAAoAAAABAA0AAgAAAAoAAAABAA4AAgAAAAoAAAACAAAAAgABAAkAAAACAAEAAgAEAAAAAAACAAIAAgAEAAAAAAACAAMAAgAEAAAAAAACAAQAAgAEAAAAAAACAAUAAgAEAAAAAAACAAYAAgAEAAAAAAACAAcAAgAQAAgAAAACAAgAAgAEAAoAAAACAAkAAgAEAAAAAAACAAoAAgAEAAAAAAACAAsAAgAEAAAAAAACAAwAAgAEAAAAAAACAA0AAgAEAAAAAAACAA4AAgAEAAAAAAADAAAAAgABAAkAAAADAAEAAgAEAAAAAAADAAIAAgAEAAAAAAADAAMAAgAQAAgAAAADAAQAAgAEAAAAAAADAAUAAgAEAAAAAAADAAYAAgAEAAAAAAADAAcAAgAEAAAAAAADAAgAAgAQAAgAAAADAAkAAgAEAAoAAAADAAoAAgAEAAAAAAADAAsAAgAEAAAAAAADAAwAAgAEAAAAAAADAA0AAgAEAAAAAAADAA4AAgAEAAAAAAAEAAAAAgABAAkAAAAEAAEAAgAEAAAAAAAEAAIAAgAPAAgAAAAEAAMAAgAPAAcAAAAEAAQAAgAPAAcAAAAEAAUAAgAEAAAAAAAEAAYAAgAEAAAAAAAEAAcAAgAEAAAAAAAEAAgAAgAEAAAAAAAEAAkAAgAEAAAAAAAEAAoAAgABAAUAAAAEAAsAAgABAAUAAAAEAAwAAgAEAAAAAAAEAA0AAgAEAAAAAAAEAA4AAgAEAAAAAAAFAAAAAgABAAkAAAAFAAEAAgAPAAgAAAAFAAIAAgAPAAcAAAAFAAMAAgAPAAcAAAAFAAQAAgAEAAAAAAAFAAUAAgAEAAAAAAAFAAYAAgAEAAAAAAAFAAcAAgAEAAAAAAAFAAgAAgAEAAAAAAAFAAkAAgABAAUAAAAFAAoAAgABAAUAAAAFAAsAAgAEAAAAAAAFAAwAAgAEAAAAAAAFAA0AAgAEAAAAAAAFAA4AAgAEAAAAAAAGAAAAAgACAAkAAAAGAAEAAgACAAoAAAAGAAIAAgACAAoAAAAGAAMAAgACAAoAAAAGAAQAAgACAAEAAAAGAAUAAgACAAEAAAAGAAYAAgACAAEAAAAGAAcAAgACAAEAAAAGAAgAAgAFAAoAAAAGAAkAAgAFAAoAAAAGAAoAAgACAAEAAAAGAAsAAgACAAEAAAAGAAwAAgACAAEAAAAGAA0AAgACAAEAAAAGAA4AAgACAAEAAAAHAAAAAgAHAAAAAAAHAAEAAgAHAAAAAAAHAAIAAgAJAAAAAAAHAAMAAgAJAAAAAAAHAAQAAgAHAAAAAAAHAAUAAgAHAAAAAAAHAAYAAgAHAAAAAAAHAAcAAgAHAAAAAAAHAAgAAgAJAAAAAAAHAAkAAgAJAAAAAAAHAAoAAgAJAAAAAAAHAAsAAgAIAAAAAAAHAAwAAgAIAAAAAAAHAA0AAgAHAAAAAAAHAA4AAgAHAAAAAAA=")
 tile_set = SubResource("TileSet_jfxgg")
+
+[node name="EndGameScreen" type="Control" parent="."]
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 474.0
+offset_right = -16.0
+offset_bottom = 474.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverText" type="AnimatedSprite2D" parent="EndGameScreen"]
+position = Vector2(202, -117)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_omuyq")
+autoplay = "default"
+frame_progress = 0.558835
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EndGameScreen"]
+layout_mode = 1
+offset_right = 316.0
+offset_bottom = 31.0
+
+[node name="BT_RestartLevel" type="Button" parent="EndGameScreen/HBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_3332s")
+
+[node name="BT_BackToMenu" type="Button" parent="EndGameScreen/HBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_f7gbp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dpr08")
+theme_override_styles/normal = SubResource("StyleBoxTexture_6aryo")
+
+[node name="BT_ExitGame" type="Button" parent="EndGameScreen/HBoxContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_xmmv7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kkwry")
+theme_override_styles/normal = SubResource("StyleBoxTexture_8xik2")
 
 [node name="Ball" parent="." instance=ExtResource("1_sesrp")]
 position = Vector2(180, 360)
@@ -330,17 +439,20 @@ position = Vector2(323, 141)
 enemy_position_list = [NodePath("../Pos1"), NodePath("../Pos2"), NodePath("../Pos3"), NodePath("../Pos4"), NodePath("../Pos5"), NodePath("../Pos6"), NodePath("../Pos7"), NodePath("../Pos8"), NodePath("../Pos9"), NodePath("../Pos10"), NodePath("../Pos11"), NodePath("../Pos12"), NodePath("../Pos13"), NodePath("../Pos14"), NodePath("../Pos15"), NodePath("../Pos16"), NodePath("../Pos17"), NodePath("../Pos18")]
 
 [node name="PlayerLifeDisplayer" type="AnimatedSprite2D" parent="."]
-position = Vector2(307, 696)
+position = Vector2(291, 684)
 sprite_frames = SubResource("SpriteFrames_ubt1x")
-frame_progress = 0.426394
-
-[node name="Button" type="Button" parent="."]
-offset_top = 682.0
-offset_right = 91.0
-offset_bottom = 713.0
-text = "EXIT GAME"
+frame_progress = 0.200697
 
 [node name="NewWaveTimer" type="Timer" parent="."]
+wait_time = 1.5
 one_shot = true
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="MusicBG" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_6eud1")
+volume_db = -12.0
+autoplay = true
+
+[connection signal="pressed" from="EndGameScreen/HBoxContainer/BT_RestartLevel" to="." method="_on_bt_restart_level_pressed"]
+[connection signal="pressed" from="EndGameScreen/HBoxContainer/BT_BackToMenu" to="." method="_on_bt_back_to_menu_pressed"]
+[connection signal="pressed" from="EndGameScreen/HBoxContainer/BT_ExitGame" to="." method="_on_bt_exit_game_pressed"]
+[connection signal="timeout" from="NewWaveTimer" to="." method="_on_new_wave_timer_timeout"]

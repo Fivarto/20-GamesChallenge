@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dx74w7ku7hbr8"
+path="res://.godot/imported/Party in the Forest.mp3-14e05a4bd406b152bab9d13a6526ce00.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Album/Album/Party in the Forest.mp3"
+dest_files=["res://.godot/imported/Party in the Forest.mp3-14e05a4bd406b152bab9d13a6526ce00.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

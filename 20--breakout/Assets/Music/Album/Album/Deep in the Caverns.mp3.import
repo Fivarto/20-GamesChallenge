@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bcxfud2p01280"
+path="res://.godot/imported/Deep in the Caverns.mp3-1877332cb6b4479de3db93474600d6e4.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Album/Album/Deep in the Caverns.mp3"
+dest_files=["res://.godot/imported/Deep in the Caverns.mp3-1877332cb6b4479de3db93474600d6e4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

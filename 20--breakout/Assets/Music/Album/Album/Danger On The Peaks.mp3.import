@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c2gxswbbf61yf"
+path="res://.godot/imported/Danger On The Peaks.mp3-dd21b01803d9cf42cd7a165620416071.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Album/Album/Danger On The Peaks.mp3"
+dest_files=["res://.godot/imported/Danger On The Peaks.mp3-dd21b01803d9cf42cd7a165620416071.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
