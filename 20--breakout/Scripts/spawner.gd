@@ -38,3 +38,8 @@ func spawn_enemy():
 	
 	else:
 		print("Enemy not assigned")
+
+func despawn_enemies():
+	
+	for inimigos in get_tree().get_nodes_in_group("inimigos"):
+		inimigos.queue_free()

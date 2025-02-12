@@ -7,6 +7,8 @@ var paddle_speed: float = 350.0
 
 var paddle_witdh: float
 
+
+
 func _ready():
 	
 	paddle_witdh = sprite_paddle.get_rect().size.x
@@ -14,6 +16,7 @@ func _ready():
 	pass
 
 func _process(delta):
+	
 	
 	if Input.is_action_pressed("Move_Left"):
 		position.x -= paddle_speed * delta

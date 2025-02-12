@@ -11,6 +11,10 @@ const MAX_X_VECTOR : float = 0.6
 
 const BALL_ACCELERATION: float = 50
 
+@onready var new_wave_timer = $"../NewWaveTimer"
+
+signal can_spawn_new_wave
+
 func _ready():
 	#ball_direction = Vector2(0, 1)
 	pass
@@ -28,7 +32,7 @@ func _physics_process(delta):
 	
 	var collision = move_and_collide(ball_direction * ball_speed * delta)
 	var collider
-	
+	var inimigos = get_tree().get_nodes_in_group("inimigos")
 	rotation += ball_rotation_speed
 	
 	if collision:
@@ -38,6 +42,10 @@ func _physics_process(delta):
 		collider = collision.get_collider()
 		
 		if collider.name == "Player":
+			
+			if inimigos.size() == 0:
+				can_spawn_new_wave.emit()
+			
 			#ball_speed += BALL_ACCELERATION
 			ball_direction = balls_new_direction(collider)
 		

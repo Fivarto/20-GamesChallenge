@@ -17,6 +17,8 @@ func _ready():
 	#TOCA A ANIMAÇÃO DO SPRITE
 	sprite_array_test.play("default")
 
+
+
 #INIMIGO LEVA DANO
 func get_damaged():
 	
@@ -26,7 +28,7 @@ func get_damaged():
 	block_life -= 1
 	
 	#SE TIVER PELO MENOS 1 DE VIDA , ENTRA
-	if block_life >= 1:
+	if block_life > 0:
 		hurt_sound.pitch_scale = randf_range(0.5 , 1.1)
 		hurt_sound.play()
 		Global.player_current_score += 1
@@ -34,6 +36,7 @@ func get_damaged():
 	#QUANDO CHEGAR NO 0 DE VIDA
 	else:
 		#TOCA O SOM "DE MORTE"
+		Global.player_current_score += 1
 		hurt_sound.play()
 		await hurt_sound.finished #ESPERA ACABAR O SOM
 		

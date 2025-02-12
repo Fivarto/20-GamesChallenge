@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cxs0p0ypbkut0"]
+[gd_scene load_steps=32 format=4 uid="uid://cxs0p0ypbkut0"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_0vjcw"]
 [ext_resource type="Texture2D" uid="uid://be6qtwmqy0d65" path="res://Assets/TileSets/Floor.png" id="1_14ttv"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bq0hji6t0trms" path="res://Assets/UI/button_sprite_sheets/button_exit3.png" id="9_r7erk"]
 [ext_resource type="Texture2D" uid="uid://4oc3r0qeimiq" path="res://Assets/UI/button_sprite_sheets/button_exit4.png" id="10_6lyti"]
 [ext_resource type="AudioStream" uid="uid://b5jsnaliawvvd" path="res://Assets/SFX/button_click_01.wav" id="11_twqtn"]
+[ext_resource type="Texture2D" uid="uid://cltjl2p4g7hyv" path="res://Assets/UI/Screens/Title.png" id="13_y2bsb"]
+[ext_resource type="AudioStream" uid="uid://camnty35c0imo" path="res://Assets/Music/Album/Album/Pixel Waves.mp3" id="14_qoevp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w1vds"]
 texture = ExtResource("1_14ttv")
@@ -238,6 +240,42 @@ animations = [{
 "speed": 32.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaw7o"]
+atlas = ExtResource("13_y2bsb")
+region = Rect2(0, 0, 240, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc3l4"]
+atlas = ExtResource("13_y2bsb")
+region = Rect2(240, 0, 240, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kre4m"]
+atlas = ExtResource("13_y2bsb")
+region = Rect2(480, 0, 240, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcs03"]
+atlas = ExtResource("13_y2bsb")
+region = Rect2(720, 0, 240, 186)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qn7r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qaw7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc3l4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kre4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcs03")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -298,6 +336,17 @@ sprite_frames = SubResource("SpriteFrames_0iqaa")
 
 [node name="SFXButtonClick" type="AudioStreamPlayer2D" parent="VBoxContainer"]
 stream = ExtResource("11_twqtn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(180, 144)
+sprite_frames = SubResource("SpriteFrames_4qn7r")
+autoplay = "default"
+frame_progress = 0.299413
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_qoevp")
+volume_db = -8.0
+autoplay = true
 
 [connection signal="mouse_entered" from="VBoxContainer/ButtonPlay" to="." method="_on_button_play_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/ButtonPlay" to="." method="_on_button_play_mouse_exited"]

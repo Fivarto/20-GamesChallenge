@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://ds5bfog3u2hsc"]
+[gd_scene load_steps=44 format=4 uid="uid://ds5bfog3u2hsc"]
 
 [ext_resource type="PackedScene" uid="uid://blcqvyhqmclyu" path="res://Scenes/ball.tscn" id="1_sesrp"]
 [ext_resource type="Script" path="res://Scripts/main_level.gd" id="1_x6svs"]
 [ext_resource type="PackedScene" uid="uid://bu7ruocqfjoco" path="res://Scenes/paddle.tscn" id="2_2m2gt"]
 [ext_resource type="Texture2D" uid="uid://be6qtwmqy0d65" path="res://Assets/TileSets/Floor.png" id="2_167ao"]
+[ext_resource type="Texture2D" uid="uid://dhbdeoqdi0e75" path="res://Assets/UI/button_sprite_sheets/button_exit.png" id="5_6uvx5"]
 [ext_resource type="FontFile" uid="uid://psgr88vqsxb0" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="5_biwdy"]
 [ext_resource type="PackedScene" uid="uid://dtsgsjrd18mnf" path="res://Scenes/spawner.tscn" id="6_0eaju"]
 [ext_resource type="AudioStream" uid="uid://dq526gnnkvr56" path="res://Assets/Music/Album/Album/Mystic Town.mp3" id="8_6eud1"]
@@ -12,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dniw8vv2vgf20" path="res://Assets/UI/button_sprite_sheets/button_exit1.png" id="9_wqxlt"]
 [ext_resource type="Texture2D" uid="uid://bq0hji6t0trms" path="res://Assets/UI/button_sprite_sheets/button_exit3.png" id="10_xnqym"]
 [ext_resource type="Texture2D" uid="uid://4oc3r0qeimiq" path="res://Assets/UI/button_sprite_sheets/button_exit4.png" id="11_akb60"]
+[ext_resource type="Texture2D" uid="uid://b5dvrna2rveqi" path="res://Assets/UI/button_sprite_sheets/button_options2.png" id="14_cf8l2"]
+[ext_resource type="Texture2D" uid="uid://b2q283kvh7md1" path="res://Assets/UI/button_sprite_sheets/button_options1.png" id="14_uixxt"]
+[ext_resource type="Texture2D" uid="uid://cm4rjub8mo5pg" path="res://Assets/UI/button_sprite_sheets/button_options4.png" id="15_0trah"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0t4qm"]
 texture = ExtResource("2_167ao")
@@ -202,6 +206,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obo6h"]
+texture = ExtResource("10_xnqym")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6w2vw"]
+texture = ExtResource("5_6uvx5")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3332s"]
 texture = ExtResource("9_wqxlt")
 
@@ -268,6 +278,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_06kxx"]
+texture = ExtResource("14_cf8l2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x4lk0"]
+texture = ExtResource("15_0trah")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pgx1k"]
+texture = ExtResource("14_uixxt")
+
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_x6svs")
 
@@ -306,9 +325,12 @@ offset_bottom = 31.0
 [node name="BT_RestartLevel" type="Button" parent="EndGameScreen/HBoxContainer"]
 custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_obo6h")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6w2vw")
 theme_override_styles/normal = SubResource("StyleBoxTexture_3332s")
 
 [node name="BT_BackToMenu" type="Button" parent="EndGameScreen/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 theme_override_styles/hover = SubResource("StyleBoxTexture_f7gbp")
@@ -444,7 +466,7 @@ sprite_frames = SubResource("SpriteFrames_ubt1x")
 frame_progress = 0.200697
 
 [node name="NewWaveTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 0.5
 one_shot = true
 
 [node name="MusicBG" type="AudioStreamPlayer2D" parent="."]
@@ -452,7 +474,17 @@ stream = ExtResource("8_6eud1")
 volume_db = -12.0
 autoplay = true
 
+[node name="Button_Options" type="Button" parent="."]
+custom_minimum_size = Vector2(48, 48)
+offset_left = 306.0
+offset_right = 354.0
+offset_bottom = 48.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_06kxx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_x4lk0")
+theme_override_styles/normal = SubResource("StyleBoxTexture_pgx1k")
+
 [connection signal="pressed" from="EndGameScreen/HBoxContainer/BT_RestartLevel" to="." method="_on_bt_restart_level_pressed"]
 [connection signal="pressed" from="EndGameScreen/HBoxContainer/BT_BackToMenu" to="." method="_on_bt_back_to_menu_pressed"]
 [connection signal="pressed" from="EndGameScreen/HBoxContainer/BT_ExitGame" to="." method="_on_bt_exit_game_pressed"]
 [connection signal="timeout" from="NewWaveTimer" to="." method="_on_new_wave_timer_timeout"]
+[connection signal="pressed" from="Button_Options" to="." method="_on_button_options_pressed"]
