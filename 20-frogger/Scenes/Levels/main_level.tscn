@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=4 uid="uid://dh7nbf70hn1hs"]
+
+[ext_resource type="Texture2D" uid="uid://dy5uu5sjt7qxc" path="res://Assets/TileMaps/TileMap_Ground.png" id="1_0cvmm"]
+[ext_resource type="PackedScene" uid="uid://dna1woetf7ewf" path="res://Scenes/Player/player.tscn" id="2_wo76k"]
+[ext_resource type="PackedScene" uid="uid://bxvt3iaqbdxqd" path="res://Scenes/Enemy/enemy_spawner.tscn" id="3_emi24"]
+[ext_resource type="PackedScene" uid="uid://dno2u22nfi4ti" path="res://Scenes/Enemy/car.tscn" id="3_wu70i"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qh7du"]
+texture = ExtResource("1_0cvmm")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hyoic"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_qh7du")
+
+[node name="MainLevel" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAAcAAAAAAAEAAAACAAcAAAAAAAEAAAADAAcAAAAAAAEAAAAEAAcAAAAAAAEAAAAFAAcAAAAAAAEAAAAGAAcAAAAAAAEAAAAHAAcAAAAAAAEAAAAIAAcAAAAAAAEAAAAJAAcAAAAAAAEAAAAAAAcAAAAAAAEAAAAAAAYAAAAAAAQAAAABAAYAAAAAAAQAAAACAAYAAAAAAAQAAAADAAYAAAAAAAQAAAAEAAYAAAAAAAQAAAAFAAYAAAAAAAQAAAAGAAYAAAAAAAQAAAAHAAYAAAAAAAQAAAAIAAYAAAAAAAQAAAAJAAYAAAAAAAQAAAAJAAUAAAAAAAMAAAAIAAUAAAAAAAMAAAAHAAUAAAAAAAMAAAAGAAUAAAAAAAMAAAAFAAUAAAAAAAMAAAAEAAUAAAAAAAMAAAADAAUAAAAAAAMAAAACAAUAAAAAAAMAAAABAAUAAAAAAAMAAAAAAAUAAAAAAAMAAAAAAAQAAAAAAAMAAAABAAQAAAAAAAMAAAACAAQAAAAAAAMAAAADAAQAAAAAAAMAAAAEAAQAAAAAAAMAAAAFAAQAAAAAAAMAAAAGAAQAAAAAAAMAAAAHAAQAAAAAAAMAAAAIAAQAAAAAAAMAAAAJAAQAAAAAAAMAAAAJAAMAAAAAAAMAAAAIAAMAAAAAAAMAAAAHAAMAAAAAAAMAAAAGAAMAAAAAAAMAAAAFAAMAAAAAAAMAAAAEAAMAAAAAAAMAAAADAAMAAAAAAAMAAAACAAMAAAAAAAMAAAABAAMAAAAAAAMAAAAAAAMAAAAAAAMAAAAAAAIAAAAAAAIAAAABAAIAAAAAAAIAAAACAAIAAAAAAAIAAAADAAIAAAAAAAIAAAAEAAIAAAAAAAIAAAAFAAIAAAAAAAIAAAAGAAIAAAAAAAIAAAAHAAIAAAAAAAIAAAAIAAIAAAAAAAIAAAAJAAIAAAAAAAIAAAAJAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAHAAEAAAAAAAEAAAAGAAEAAAAAAAEAAAAFAAEAAAAAAAEAAAAEAAEAAAAAAAEAAAADAAEAAAAAAAEAAAACAAEAAAAAAAEAAAABAAEAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_hyoic")
+
+[node name="Player" parent="." instance=ExtResource("2_wo76k")]
+position = Vector2(16, 205)
+
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("spawn_positions") instance=ExtResource("3_emi24")]
+_enemy = ExtResource("3_wu70i")
+spawn_positions = [NodePath("SpawnPosition1"), NodePath("SpawnPosition2"), NodePath("SpawnPosition3")]
+
+[node name="SpawnPosition1" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(320, 176)
+
+[node name="SpawnPosition2" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(320, 144)
+
+[node name="SpawnPosition3" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(320, 112)
