@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dy5uu5sjt7qxc" path="res://Assets/TileMaps/TileMap_Ground.png" id="1_0cvmm"]
 [ext_resource type="PackedScene" uid="uid://dna1woetf7ewf" path="res://Scenes/Player/player.tscn" id="2_wo76k"]
 [ext_resource type="PackedScene" uid="uid://bxvt3iaqbdxqd" path="res://Scenes/Enemy/enemy_spawner.tscn" id="3_emi24"]
-[ext_resource type="PackedScene" uid="uid://dno2u22nfi4ti" path="res://Scenes/Enemy/car.tscn" id="3_wu70i"]
+[ext_resource type="PackedScene" uid="uid://33pp6i8pspb8" path="res://Scenes/Enemy/moto.tscn" id="4_m7vo7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qh7du"]
 texture = ExtResource("1_0cvmm")
@@ -27,15 +27,14 @@ tile_set = SubResource("TileSet_hyoic")
 [node name="Player" parent="." instance=ExtResource("2_wo76k")]
 position = Vector2(16, 205)
 
-[node name="EnemySpawner" parent="." node_paths=PackedStringArray("spawn_positions") instance=ExtResource("3_emi24")]
-_enemy = ExtResource("3_wu70i")
-spawn_positions = [NodePath("SpawnPosition1"), NodePath("SpawnPosition2"), NodePath("SpawnPosition3")]
-
-[node name="SpawnPosition1" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(320, 176)
-
-[node name="SpawnPosition2" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(320, 144)
-
-[node name="SpawnPosition3" type="Marker2D" parent="EnemySpawner"]
+[node name="EnemySpawner3" parent="." instance=ExtResource("3_emi24")]
 position = Vector2(320, 112)
+_enemy = ExtResource("4_m7vo7")
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_emi24")]
+position = Vector2(0, 144)
+_enemy = ExtResource("4_m7vo7")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_emi24")]
+position = Vector2(320, 176)
+_enemy = ExtResource("4_m7vo7")

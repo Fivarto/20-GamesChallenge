@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ENEMY_RES" load_steps=2 format=3 uid="uid://bs7545p07scf1"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/enemy_res_scrp.gd" id="1_skiei"]
+
+[resource]
+script = ExtResource("1_skiei")
+enemy_speed = 285.0
+enemy_direction = -1
