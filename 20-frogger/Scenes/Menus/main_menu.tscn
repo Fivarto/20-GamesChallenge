@@ -1,0 +1,107 @@
+[gd_scene load_steps=18 format=4 uid="uid://c4q6lynr8d1d3"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_ajyl2"]
+[ext_resource type="Texture2D" uid="uid://dy5uu5sjt7qxc" path="res://Assets/TileMaps/TileMap_Ground.png" id="1_widye"]
+[ext_resource type="FontFile" uid="uid://psgr88vqsxb0" path="res://Assets/Fonts/PixelOperator8-Bold.ttf" id="2_jjpnh"]
+[ext_resource type="Texture2D" uid="uid://b2deh8os7kuju" path="res://Assets/UI/Buttons/SquareButton_Play_Hover.png" id="3_il1bp"]
+[ext_resource type="Texture2D" uid="uid://bn8t248kwovf7" path="res://Assets/UI/Buttons/SquareButton_Play_Press.png" id="3_njx2j"]
+[ext_resource type="Texture2D" uid="uid://by7wq2foralo6" path="res://Assets/UI/Buttons/SquareButton_Play_Normal.png" id="5_a12sf"]
+[ext_resource type="Texture2D" uid="uid://bmytup03ae3wt" path="res://Assets/UI/Buttons/SquareButton_Exit_Hover.png" id="5_x0nnt"]
+[ext_resource type="Texture2D" uid="uid://bun3scw1lfdap" path="res://Assets/UI/Buttons/SquareButton_Exit_Press.png" id="6_0qao7"]
+[ext_resource type="Texture2D" uid="uid://cl57x8ahce7d6" path="res://Assets/UI/Buttons/SquareButton_Exit_Normal.png" id="7_8y6ve"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qefj1"]
+texture = ExtResource("1_widye")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_x3nt5"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_qefj1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lmp74"]
+texture = ExtResource("3_il1bp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0f51w"]
+texture = ExtResource("3_njx2j")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bt07e"]
+texture = ExtResource("5_a12sf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rg6qc"]
+texture = ExtResource("5_x0nnt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nf3qb"]
+texture = ExtResource("6_0qao7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fseer"]
+texture = ExtResource("7_8y6ve")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ajyl2")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAcAAAAAAAQAAAABAAcAAAAAAAQAAAACAAcAAAAAAAQAAAADAAcAAAAAAAQAAAAEAAcAAAAAAAQAAAAFAAcAAAAAAAQAAAAGAAcAAAAAAAQAAAAHAAcAAAAAAAQAAAAIAAcAAAAAAAQAAAAJAAcAAAAAAAQAAAAJAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAHAAAAAAAAAAQAAAAGAAAAAAAAAAQAAAAFAAAAAAAAAAQAAAAEAAAAAAAAAAQAAAADAAAAAAAAAAQAAAACAAAAAAAAAAQAAAABAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAYAAAAAAAEAAAABAAYAAAAAAAEAAAACAAYAAAAAAAEAAAADAAYAAAAAAAEAAAAEAAYAAAAAAAEAAAAFAAYAAAAAAAEAAAAGAAYAAAAAAAEAAAAHAAYAAAAAAAEAAAAIAAYAAAAAAAEAAAAJAAYAAAAAAAEAAAAJAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAHAAEAAAAAAAEAAAAGAAEAAAAAAAEAAAAFAAEAAAAAAAEAAAAEAAEAAAAAAAEAAAADAAEAAAAAAAEAAAACAAEAAAAAAAEAAAABAAEAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_x3nt5")
+
+[node name="VBoxMainMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxMainMenu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jjpnh")
+text = "CAPYBARA CROSS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -2.0
+offset_right = 16.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxTexture_lmp74")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_0f51w")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bt07e")
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxTexture_rg6qc")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nf3qb")
+theme_override_styles/normal = SubResource("StyleBoxTexture_fseer")
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,18 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://dna1woetf7ewf"]
+[gd_scene load_steps=9 format=3 uid="uid://dna1woetf7ewf"]
 
-[ext_resource type="Texture2D" uid="uid://dnmxxf0tvevix" path="res://Assets/Sprites_Player/Capybara.png" id="1_2hrkm"]
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_2ocxp"]
+[ext_resource type="Texture2D" uid="uid://csxvysr8tttlo" path="res://Assets/Sprites_Player/Capybara_Walk_SpriteSheet.png" id="2_e0w5e"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vjxlf"]
-radius = 4.0
-height = 16.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_cns8x"]
+atlas = ExtResource("2_e0w5e")
+region = Rect2(0, 0, 32, 32)
 
-[node name="Player" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cab0n"]
+atlas = ExtResource("2_e0w5e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fircj"]
+atlas = ExtResource("2_e0w5e")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn5si"]
+atlas = ExtResource("2_e0w5e")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_auhmn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cns8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cab0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fircj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn5si")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j07qe"]
+size = Vector2(6, 15)
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_2ocxp")
 
-[node name="Sprite_Player" type="Sprite2D" parent="."]
-texture = ExtResource("1_2hrkm")
+[node name="Sprite_Player" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_auhmn")
+frame_progress = 0.594192
 
-[node name="CollisionBody" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_vjxlf")
+[node name="PlayerDangerZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDangerZone"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_j07qe")
+
+[connection signal="area_shape_entered" from="PlayerDangerZone" to="." method="_on_player_danger_zone_area_shape_entered"]
