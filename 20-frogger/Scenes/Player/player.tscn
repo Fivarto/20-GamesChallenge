@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dna1woetf7ewf"]
+[gd_scene load_steps=11 format=3 uid="uid://dna1woetf7ewf"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_2ocxp"]
 [ext_resource type="Texture2D" uid="uid://csxvysr8tttlo" path="res://Assets/Sprites_Player/Capybara_Walk_SpriteSheet.png" id="2_e0w5e"]
+[ext_resource type="PackedScene" uid="uid://dnmeepbgal1un" path="res://Scenes/Player/drowning_detector.tscn" id="3_nphmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cns8x"]
 atlas = ExtResource("2_e0w5e")
@@ -42,7 +43,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j07qe"]
 size = Vector2(6, 15)
 
+[sub_resource type="Gradient" id="Gradient_bl2o0"]
+colors = PackedColorArray(0.85098, 0.368627, 0.298039, 1, 0.976471, 0.976471, 0.25098, 1)
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 10
 script = ExtResource("1_2ocxp")
 
 [node name="Sprite_Player" type="AnimatedSprite2D" parent="."]
@@ -50,9 +55,38 @@ sprite_frames = SubResource("SpriteFrames_auhmn")
 frame_progress = 0.594192
 
 [node name="PlayerDangerZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDangerZone"]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_j07qe")
 
-[connection signal="area_shape_entered" from="PlayerDangerZone" to="." method="_on_player_danger_zone_area_shape_entered"]
+[node name="SparkleSplatter" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 45.0
+initial_velocity_max = 185.0
+scale_amount_max = 3.0
+color = Color(1, 1, 0.215686, 1)
+color_ramp = SubResource("Gradient_bl2o0")
+
+[node name="RespawnEffect" type="CPUParticles2D" parent="."]
+position = Vector2(0, -7)
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(6, 1)
+scale_amount_max = 2.0
+
+[node name="DrowningDetector" parent="." instance=ExtResource("3_nphmh")]
+
+[connection signal="area_entered" from="PlayerDangerZone" to="." method="_on_player_area_damaged"]
+[connection signal="drowned" from="DrowningDetector" to="." method="_on_drowning_detector_drowned"]

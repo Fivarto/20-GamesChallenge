@@ -1,6 +1,6 @@
-extends StaticBody2D
+extends Node2D
 
-var log_speed: float = 80
+var log_speed: float = 40
 
 func _process(delta: float) -> void:
 	

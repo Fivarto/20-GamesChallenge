@@ -2,16 +2,17 @@ extends CharacterBody2D
 
 signal player_hit
 
+@export var respawn_location: Marker2D
 
-@onready var sprite_player: AnimatedSprite2D = $Sprite_Player
-@onready var player_danger_zone: Area2D = $PlayerDangerZone
-
+var enabled: bool = true
 
 func _input(event):
 	
+	if !enabled:
+		return
+	
 	#MOVE UP
 	if Input.is_action_just_pressed("Move_Up"):
-		
 		position.y -= 32
 	
 	#MOVE_DOWN
@@ -27,7 +28,32 @@ func _input(event):
 		position.x += 32
 
 
-func _on_player_danger_zone_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	#print("Algo bateu na area do player")
+
+
+
+
+
+
+func _on_player_area_damaged(area):
+	
+	enabled = false
+	
+	$Sprite_Player.visible = false
+	$SparkleSplatter.emitting = true
+	
+	await $SparkleSplatter.finished
+	
+	$RespawnEffect.emitting = true
+	self.position = respawn_location.position
+	
+	await $RespawnEffect.finished
+	
+	$Sprite_Player.visible = true
+	
+	enabled = true
 	
 	emit_signal("player_hit")
+
+
+func _on_drowning_detector_drowned():
+	print("Drowning")
