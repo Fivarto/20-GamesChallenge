@@ -28,14 +28,7 @@ func _input(event):
 		position.x += 32
 
 
-
-
-
-
-
-
-func _on_player_area_damaged(area):
-	
+func died():
 	enabled = false
 	
 	$Sprite_Player.visible = false
@@ -51,9 +44,17 @@ func _on_player_area_damaged(area):
 	$Sprite_Player.visible = true
 	
 	enabled = true
+
+
+
+
+
+func _on_player_area_damaged(area):
 	
+	died()
 	emit_signal("player_hit")
 
 
 func _on_drowning_detector_drowned():
+	died()
 	print("Drowning")

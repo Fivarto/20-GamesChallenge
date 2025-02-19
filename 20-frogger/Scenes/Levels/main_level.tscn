@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dh7nbf70hn1hs"]
+[gd_scene load_steps=16 format=4 uid="uid://dh7nbf70hn1hs"]
 
 [ext_resource type="Texture2D" uid="uid://dy5uu5sjt7qxc" path="res://Assets/TileMaps/TileMap_Ground.png" id="1_0cvmm"]
 [ext_resource type="Script" path="res://Scripts/Levels/main_level.gd" id="1_78530"]
@@ -24,6 +24,64 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_qh7du")
 
+[sub_resource type="Animation" id="Animation_qdeh2"]
+resource_name = "water_level_transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector2(160, 104), Vector2(160, -104)]
+}
+
+[sub_resource type="Animation" id="Animation_d1kei"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(160, 104)]
+}
+
+[sub_resource type="Animation" id="Animation_eshpi"]
+resource_name = "stree_level_transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2.73208, 2.73208),
+"update": 0,
+"values": [Vector2(160, -104), Vector2(160, 104)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_434uu"]
+_data = {
+"RESET": SubResource("Animation_d1kei"),
+"stree_level_transition": SubResource("Animation_eshpi"),
+"water_level_transition": SubResource("Animation_qdeh2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gukwj"]
+size = Vector2(320, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8k8c5"]
+size = Vector2(320, 16)
+
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_78530")
 
@@ -33,7 +91,7 @@ tile_set = SubResource("TileSet_hyoic")
 
 [node name="Player" parent="." node_paths=PackedStringArray("respawn_location") instance=ExtResource("2_wo76k")]
 unique_name_in_owner = true
-position = Vector2(152, 0)
+position = Vector2(160, 204)
 respawn_location = NodePath("../Respawn")
 
 [node name="SpawnerLane5" parent="." instance=ExtResource("3_emi24")]
@@ -66,4 +124,30 @@ position = Vector2(240, 208)
 position = Vector2(152, 204)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(160, 128)
+position = Vector2(160, 104)
+
+[node name="CameraAnimation" type="AnimationPlayer" parent="Camera2D"]
+libraries = {
+"": SubResource("AnimationLibrary_434uu")
+}
+
+[node name="WaterLevelTransition" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterLevelTransition"]
+position = Vector2(160, -8)
+shape = SubResource("RectangleShape2D_gukwj")
+debug_color = Color(0.235831, 0.285294, 0.871754, 0.42)
+
+[node name="StreetLevelTransition" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StreetLevelTransition"]
+position = Vector2(160, 8)
+shape = SubResource("RectangleShape2D_8k8c5")
+debug_color = Color(0.324612, 0.331849, 0.15202, 0.42)
+
+[connection signal="area_entered" from="WaterLevelTransition" to="." method="_on_water_level_transition_area_entered"]
+[connection signal="area_entered" from="StreetLevelTransition" to="." method="_on_street_level_transition_area_entered"]

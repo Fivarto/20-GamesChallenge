@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dna1woetf7ewf"]
+[gd_scene load_steps=12 format=3 uid="uid://dna1woetf7ewf"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_2ocxp"]
 [ext_resource type="Texture2D" uid="uid://csxvysr8tttlo" path="res://Assets/Sprites_Player/Capybara_Walk_SpriteSheet.png" id="2_e0w5e"]
@@ -46,6 +46,10 @@ size = Vector2(6, 15)
 [sub_resource type="Gradient" id="Gradient_bl2o0"]
 colors = PackedColorArray(0.85098, 0.368627, 0.298039, 1, 0.976471, 0.976471, 0.25098, 1)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_353vb"]
+radius = 5.0
+height = 16.0
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
 script = ExtResource("1_2ocxp")
@@ -55,7 +59,7 @@ sprite_frames = SubResource("SpriteFrames_auhmn")
 frame_progress = 0.594192
 
 [node name="PlayerDangerZone" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDangerZone"]
@@ -87,6 +91,15 @@ emission_rect_extents = Vector2(6, 1)
 scale_amount_max = 2.0
 
 [node name="DrowningDetector" parent="." instance=ExtResource("3_nphmh")]
+
+[node name="PlayerArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="PlayerArea"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_353vb")
+debug_color = Color(0.853072, 0.342337, 0.376007, 0.42)
 
 [connection signal="area_entered" from="PlayerDangerZone" to="." method="_on_player_area_damaged"]
 [connection signal="drowned" from="DrowningDetector" to="." method="_on_drowning_detector_drowned"]
