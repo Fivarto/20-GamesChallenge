@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfxakwsbwhm5y"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/Turtle/turtle_section.gd" id="1_oka1l"]
+
+[node name="TurtleSection" type="Node2D"]
+script = ExtResource("1_oka1l")

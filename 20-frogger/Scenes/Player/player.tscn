@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0l6nbin1kcj5"]
+[gd_scene load_steps=9 format=3 uid="uid://0l6nbin1kcj5"]
 
 [ext_resource type="Texture2D" uid="uid://dnmxxf0tvevix" path="res://Assets/Sprites_Player/Capybara.png" id="1_b4hxh"]
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_t74k3"]
@@ -44,7 +44,10 @@ _data = {
 "walk": SubResource("Animation_m0m4x")
 }
 
-[node name="Player" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qw1s"]
+
+[node name="Player" type="Area2D" groups=["Player"]]
+z_index = 10
 script = ExtResource("1_t74k3")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
@@ -58,3 +61,20 @@ shape = SubResource("RectangleShape2D_8gk2g")
 libraries = {
 "": SubResource("AnimationLibrary_kn2a3")
 }
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="LogDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LogDetector"]
+shape = SubResource("RectangleShape2D_1qw1s")
+debug_color = Color(0.529649, 0.123498, 0.139613, 0.42)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="LogDetector" to="." method="_on_log_detector_area_entered"]
+[connection signal="area_exited" from="LogDetector" to="." method="_on_log_detector_area_exited"]

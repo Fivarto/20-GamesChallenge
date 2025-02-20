@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://yy28xqi8d8lh"]
+
+[ext_resource type="FontFile" uid="uid://ghvifafc88cx" path="res://Assets/Fonts/PixelOperator8.ttf" id="1_3p6ni"]
+[ext_resource type="Script" path="res://Scripts/UI/u_itscn.gd" id="1_mbf3i"]
+[ext_resource type="Texture2D" uid="uid://bfxud61qsmt5m" path="res://Assets/UI/Buttons/Restart/restart_normal.png" id="3_7n3pw"]
+[ext_resource type="Texture2D" uid="uid://c3g7vxrxwrp88" path="res://Assets/UI/Buttons/Restart/restart_pressed.png" id="4_5yuq5"]
+[ext_resource type="Texture2D" uid="uid://bg2m3qkoh8ay1" path="res://Assets/UI/Buttons/Restart/restart_hover.png" id="5_n3rxm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkas5"]
+bg_color = Color(1, 0.0941176, 0.298039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmh8o"]
+bg_color = Color(0.113725, 0.72549, 0.262745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8fgx"]
+bg_color = Color(0.0509804, 0.486275, 0.54902, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_mbf3i")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="HUD_Container" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="LifesContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimerContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="TimerTitle" type="Label" parent="MarginContainer/HUD_Container/TimerContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_3p6ni")
+theme_override_font_sizes/font_size = 8
+text = "TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerProgress" type="ProgressBar" parent="MarginContainer/HUD_Container/TimerContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(176, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_rkas5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nmh8o")
+max_value = 180.0
+value = 180.0
+fill_mode = 1
+show_percentage = false
+
+[node name="WinLoseScreen" type="CenterContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/WinLoseScreen"]
+custom_minimum_size = Vector2(248, 248)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h8fgx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/WinLoseScreen/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameResultTitle" type="Label" parent="MarginContainer/WinLoseScreen/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3p6ni")
+theme_override_font_sizes/font_size = 16
+text = "YOU WON!! CONGRATULATIONS"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="TextureButton" parent="MarginContainer/WinLoseScreen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_7n3pw")
+texture_pressed = ExtResource("4_5yuq5")
+texture_hover = ExtResource("5_n3rxm")
+stretch_mode = 3
+
+[node name="TimeoutTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="MarginContainer/WinLoseScreen/PanelContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

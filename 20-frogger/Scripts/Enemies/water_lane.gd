@@ -3,6 +3,7 @@ class_name WaterLane
 
 const HALF_LOG_LENGTH = 8
 
+#LOGS CHARACTERISTICS
 @export var logs_length = [4, 4, 4]
 @export var distance_between_logs = 180
 @export var log_speed: float = 200
@@ -10,6 +11,7 @@ const HALF_LOG_LENGTH = 8
 @export var movement_direction:int = 1
 
 
+#CENA LOG
 @onready var log_scene:PackedScene = preload("res://Scenes/Level/logs.tscn")
 
 var logs: Array[Log] = []
@@ -19,13 +21,15 @@ func _ready() -> void:
 	
 	var index = 0
 	
+	#                       -720 + (4 * 8 * - 1 = 32) = -752 
 	var start_position_x = -movement_x_limit + logs_length[0] * HALF_LOG_LENGTH * -movement_direction
 	
+	#print(start_position_x)
 	
 	for logs_length in logs_length:
 		
 		var log = log_scene.instantiate() as Log #INSTANCIANDO A CENA LOG
-		log.middle_section_length = logs_length - 2 # 4 - 2 ?
+		log.middle_section_length = logs_length - 2 # 4 - 2 , Duas seções no meio e 1 log start e log end pra fechar o tamanho 4?
 		add_child(log)
 		
 		var previous_log_position = -movement_x_limit if index == 0 else logs[index - 1].position.x
@@ -37,7 +41,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	
+	#LOOP PARA MOVIMENTAR O LOG, PRATICAMENTE O MESMO DE VEHICLE
 	for log in logs:
 		var new_position_x = log_speed * delta * movement_direction + log.position.x
 		if abs(new_position_x - movement_x_limit) < 10:

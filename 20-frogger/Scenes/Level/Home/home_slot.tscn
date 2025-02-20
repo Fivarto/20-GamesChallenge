@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcvqrhxem4wb"]
+
+[ext_resource type="Script" path="res://Scripts/Home/home_slot.gd" id="1_484ai"]
+[ext_resource type="Texture2D" uid="uid://cgll5514wbgc2" path="res://Assets/ScenarioElements/home_empty.png" id="1_q2ff2"]
+[ext_resource type="Texture2D" uid="uid://bbl6wilv5ae84" path="res://Assets/ScenarioElements/home_capy.png" id="2_tkpsc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8aem"]
+
+[node name="HomeSlot" type="Area2D"]
+script = ExtResource("1_484ai")
+
+[node name="Emptyhome" type="Sprite2D" parent="."]
+texture = ExtResource("1_q2ff2")
+
+[node name="CapyInHome" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_tkpsc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o8aem")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

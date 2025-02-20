@@ -1,14 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://4860ym0pjvb"]
+[gd_scene load_steps=4 format=3 uid="uid://4860ym0pjvb"]
 
 [ext_resource type="Texture2D" uid="uid://d36umju2g10fs" path="res://Assets/ScenarioElements/log_middle.png" id="1_4w1pm"]
+[ext_resource type="Script" path="res://Scripts/Logs/log_middle.gd" id="1_iblgx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a65lr"]
 size = Vector2(16, 14)
 
-[node name="Log_Middle" type="Area2D"]
+[node name="Log_Middle" type="Area2D" groups=["log"]]
+collision_mask = 2
+script = ExtResource("1_iblgx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_4w1pm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_a65lr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
