@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="ENEMY_RES" load_steps=2 format=3 uid="uid://ctag3kiwrjxng"]
-
-[ext_resource type="Script" path="res://Scripts/Resources/enemy_res_scrp.gd" id="1_vyux5"]
-
-[resource]
-script = ExtResource("1_vyux5")
-enemy_speed = 70.0
-enemy_direction = 1

@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfpvctn5n8dp0"]
-
-[ext_resource type="PackedScene" uid="uid://dno2u22nfi4ti" path="res://Scenes/Enemy/enemy.tscn" id="1_7bkt8"]
-[ext_resource type="Resource" uid="uid://di1h15w3gv0d2" path="res://Scripts/Resources/car_stats.tres" id="2_55ig0"]
-
-[node name="Car" instance=ExtResource("1_7bkt8")]
-vehicle_status = ExtResource("2_55ig0")

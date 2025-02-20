@@ -1,105 +1,60 @@
-[gd_scene load_steps=12 format=3 uid="uid://dna1woetf7ewf"]
+[gd_scene load_steps=8 format=3 uid="uid://0l6nbin1kcj5"]
 
-[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_2ocxp"]
-[ext_resource type="Texture2D" uid="uid://csxvysr8tttlo" path="res://Assets/Sprites_Player/Capybara_Walk_SpriteSheet.png" id="2_e0w5e"]
-[ext_resource type="PackedScene" uid="uid://dnmeepbgal1un" path="res://Scenes/Player/drowning_detector.tscn" id="3_nphmh"]
+[ext_resource type="Texture2D" uid="uid://dnmxxf0tvevix" path="res://Assets/Sprites_Player/Capybara.png" id="1_b4hxh"]
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_t74k3"]
+[ext_resource type="Texture2D" uid="uid://dxdknxch0al43" path="res://Assets/Sprites_Player/Capybara_Walk.png" id="3_affxu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cns8x"]
-atlas = ExtResource("2_e0w5e")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gk2g"]
+size = Vector2(6, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cab0n"]
-atlas = ExtResource("2_e0w5e")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="Animation" id="Animation_u53sy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_b4hxh")]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fircj"]
-atlas = ExtResource("2_e0w5e")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="Animation" id="Animation_m0m4x"]
+resource_name = "walk"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:texture")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_affxu"), ExtResource("1_b4hxh"), ExtResource("1_b4hxh")]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qn5si"]
-atlas = ExtResource("2_e0w5e")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kn2a3"]
+_data = {
+"RESET": SubResource("Animation_u53sy"),
+"walk": SubResource("Animation_m0m4x")
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_auhmn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cns8x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cab0n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fircj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qn5si")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
+[node name="Player" type="Area2D"]
+script = ExtResource("1_t74k3")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j07qe"]
-size = Vector2(6, 15)
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_b4hxh")
 
-[sub_resource type="Gradient" id="Gradient_bl2o0"]
-colors = PackedColorArray(0.85098, 0.368627, 0.298039, 1, 0.976471, 0.976471, 0.25098, 1)
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_8gk2g")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_353vb"]
-radius = 5.0
-height = 16.0
-
-[node name="Player" type="CharacterBody2D"]
-z_index = 10
-script = ExtResource("1_2ocxp")
-
-[node name="Sprite_Player" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_auhmn")
-frame_progress = 0.594192
-
-[node name="PlayerDangerZone" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDangerZone"]
-position = Vector2(0, 3.5)
-shape = SubResource("RectangleShape2D_j07qe")
-
-[node name="SparkleSplatter" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 20
-lifetime = 0.5
-one_shot = true
-explosiveness = 0.8
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 45.0
-initial_velocity_max = 185.0
-scale_amount_max = 3.0
-color = Color(1, 1, 0.215686, 1)
-color_ramp = SubResource("Gradient_bl2o0")
-
-[node name="RespawnEffect" type="CPUParticles2D" parent="."]
-position = Vector2(0, -7)
-emitting = false
-amount = 20
-lifetime = 0.2
-one_shot = true
-emission_shape = 3
-emission_rect_extents = Vector2(6, 1)
-scale_amount_max = 2.0
-
-[node name="DrowningDetector" parent="." instance=ExtResource("3_nphmh")]
-
-[node name="PlayerArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-
-[node name="PlayerCollision" type="CollisionShape2D" parent="PlayerArea"]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_353vb")
-debug_color = Color(0.853072, 0.342337, 0.376007, 0.42)
-
-[connection signal="area_entered" from="PlayerDangerZone" to="." method="_on_player_area_damaged"]
-[connection signal="drowned" from="DrowningDetector" to="." method="_on_drowning_detector_drowned"]
+[node name="PlayerAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kn2a3")
+}

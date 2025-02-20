@@ -1,60 +1,74 @@
-extends CharacterBody2D
+extends Area2D
+class_name Player
 
-signal player_hit
+const PLAYER_SPAWN_POSITION = Vector2 (176, 432)
+const POSITION_INCREMENT: float = 32
 
-@export var respawn_location: Marker2D
+var new_position: Vector2 = Vector2.ZERO
 
-var enabled: bool = true
+@export var speed: float = 40
 
-func _input(event):
+
+var screen_bounds = {
 	
-	if !enabled:
+	"left": 0,
+	"right": 0,
+	"bottom": 0
+	
+}
+
+
+@onready var player_sprite: Sprite2D = $PlayerSprite
+@onready var player_animation: AnimationPlayer = $PlayerAnimation
+
+
+func _ready() -> void:
+	
+	screen_bounds.left = 0
+	screen_bounds.right = get_viewport().size.x
+	screen_bounds.bottom = get_viewport().size.y
+	
+
+func _process(delta: float) -> void:
+	
+	if new_position == Vector2.ZERO:
 		return
 	
-	#MOVE UP
-	if Input.is_action_just_pressed("Move_Up"):
-		position.y -= 32
+	position = lerp(position , new_position, speed * delta)
 	
-	#MOVE_DOWN
-	if Input.is_action_just_pressed("Move_Down"):
-		position.y += 32
+	if absf((position - new_position).length()) < 0.001:
+		position = round(position)
 	
-	#MOVE_LEFT
-	if Input.is_action_just_pressed("Move_Left"):
-		position.x -= 32
-	
-	#MOVE_RIGHT
-	if Input.is_action_just_pressed("Move_Right"):
-		position.x += 32
+	else:
+		player_animation.play("walk")
 
-
-func died():
-	enabled = false
+func _input(event: InputEvent) -> void:
 	
-	$Sprite_Player.visible = false
-	$SparkleSplatter.emitting = true
+	var position_candidate
 	
-	await $SparkleSplatter.finished
 	
-	$RespawnEffect.emitting = true
-	self.position = respawn_location.position
+	if Input.is_action_just_pressed("UP"):
+		position_candidate = Vector2.UP * POSITION_INCREMENT + position
+		player_sprite.rotation_degrees = 0
+		
+	elif Input.is_action_just_pressed("DOWN"):
+		position_candidate = Vector2.DOWN * POSITION_INCREMENT + position
+		player_sprite.rotation_degrees = 180
+		
+	elif Input.is_action_just_pressed("LEFT"):
+		position_candidate = Vector2.LEFT * POSITION_INCREMENT + position
+		player_sprite.rotation_degrees = -90
+		
+	elif Input.is_action_just_pressed("RIGHT"):
+		position_candidate = Vector2.RIGHT * POSITION_INCREMENT + position
+		player_sprite.rotation_degrees = 90
+		
 	
-	await $RespawnEffect.finished
+	if !position_candidate:
+		return
 	
-	$Sprite_Player.visible = true
+	if position_candidate.x < screen_bounds.left or position_candidate.x > screen_bounds.right or position_candidate.y > screen_bounds.bottom - 16:
+		return
 	
-	enabled = true
-
-
-
-
-
-func _on_player_area_damaged(area):
 	
-	died()
-	emit_signal("player_hit")
-
-
-func _on_drowning_detector_drowned():
-	died()
-	print("Drowning")
+	new_position = position_candidate

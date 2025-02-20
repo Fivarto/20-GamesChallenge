@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6jd2ql0kp1tc"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/water_lane.gd" id="1_dyth7"]
+
+[node name="WaterLane" type="Node2D"]
+script = ExtResource("1_dyth7")

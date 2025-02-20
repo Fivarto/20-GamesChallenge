@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://4860ym0pjvb"]
+
+[ext_resource type="Texture2D" uid="uid://d36umju2g10fs" path="res://Assets/ScenarioElements/log_middle.png" id="1_4w1pm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a65lr"]
+size = Vector2(16, 14)
+
+[node name="Log_Middle" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4w1pm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a65lr")
