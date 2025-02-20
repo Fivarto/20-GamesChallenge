@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dna1woetf7ewf"]
+[gd_scene load_steps=13 format=3 uid="uid://dna1woetf7ewf"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_2ocxp"]
 [ext_resource type="Texture2D" uid="uid://csxvysr8tttlo" path="res://Assets/Sprites_Player/Capybara_Walk_SpriteSheet.png" id="2_e0w5e"]
+[ext_resource type="Texture2D" uid="uid://bchlwei07yv1d" path="res://Assets/Particles/Orange.png" id="3_c1tl3"]
 [ext_resource type="PackedScene" uid="uid://dnmeepbgal1un" path="res://Scenes/Player/drowning_detector.tscn" id="3_nphmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cns8x"]
@@ -86,6 +87,7 @@ emitting = false
 amount = 20
 lifetime = 0.2
 one_shot = true
+texture = ExtResource("3_c1tl3")
 emission_shape = 3
 emission_rect_extents = Vector2(6, 1)
 scale_amount_max = 2.0

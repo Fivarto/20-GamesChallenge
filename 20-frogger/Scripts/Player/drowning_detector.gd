@@ -5,7 +5,10 @@ signal drowned
 var water_collision: int = 0
 var wasDrowningLastFrame: bool = false
 
+
 func _process(delta):
+	
+	print(water_collision)
 	
 	var isDrowning = water_collision > 0
 	

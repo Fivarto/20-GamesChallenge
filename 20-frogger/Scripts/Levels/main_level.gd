@@ -6,20 +6,40 @@ extends Node2D
 
 var isInWaterLevel: bool = false
 
+var sticky_to_log: bool = false
+
 func _ready() -> void:
 	
 	player.connect("player_hit" , Callable(self, "_on_player_hit"))
+	player.connect("drowning" , Callable(self, "on_player_drowning"))
 	
+	get_tree().get_nodes_in_group("moveable")[0].connect("stick_to_log", Callable(self, "player_on_board"))
+	get_tree().get_nodes_in_group("moveable")[0].connect("get_of_the_log", Callable(self, "player_of_board"))
 
-
-
-func _on_player_hit():
+func _process(delta):
 	
-	#player.queue_free()
+	if sticky_to_log == true:
+		player.position = get_tree().get_nodes_in_group("moveable")[0].position
+
+
+func on_player_drowning():
 	
-	print("Player Eliminado")
+	isInWaterLevel = false
+	
+	camera_animation.play("stree_level_transition")
 
 
+
+func player_on_board():
+	
+	sticky_to_log = true
+	
+	print("LOG SINAL CONNECTED")
+
+func player_of_board():
+	sticky_to_log = false
+	player.position.y -= 36
+	print("LOG OFF")
 
 #CAMERA POSITION CHANGES
 func _on_water_level_transition_area_entered(area: Area2D) -> void:

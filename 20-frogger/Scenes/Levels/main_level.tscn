@@ -24,21 +24,6 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_qh7du")
 
-[sub_resource type="Animation" id="Animation_qdeh2"]
-resource_name = "water_level_transition"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(2, 2),
-"update": 0,
-"values": [Vector2(160, 104), Vector2(160, -104)]
-}
-
 [sub_resource type="Animation" id="Animation_d1kei"]
 length = 0.001
 tracks/0/type = "value"
@@ -67,6 +52,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(2.73208, 2.73208),
 "update": 0,
 "values": [Vector2(160, -104), Vector2(160, 104)]
+}
+
+[sub_resource type="Animation" id="Animation_qdeh2"]
+resource_name = "water_level_transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector2(160, 104), Vector2(160, -104)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_434uu"]
@@ -117,9 +117,6 @@ _enemy = ExtResource("4_m7vo7")
 position = Vector2(320, 176)
 _enemy_spawn_cooldown = 10.0
 
-[node name="Log" parent="." instance=ExtResource("8_qbx0m")]
-position = Vector2(240, 208)
-
 [node name="Respawn" type="Marker2D" parent="."]
 position = Vector2(152, 204)
 
@@ -148,6 +145,12 @@ collision_mask = 2
 position = Vector2(160, 8)
 shape = SubResource("RectangleShape2D_8k8c5")
 debug_color = Color(0.324612, 0.331849, 0.15202, 0.42)
+
+[node name="Log" parent="." instance=ExtResource("8_qbx0m")]
+position = Vector2(320, -48)
+
+[node name="Log2" parent="." instance=ExtResource("8_qbx0m")]
+position = Vector2(432, -80)
 
 [connection signal="area_entered" from="WaterLevelTransition" to="." method="_on_water_level_transition_area_entered"]
 [connection signal="area_entered" from="StreetLevelTransition" to="." method="_on_street_level_transition_area_entered"]
