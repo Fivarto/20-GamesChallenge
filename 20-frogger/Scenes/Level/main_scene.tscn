@@ -95,13 +95,14 @@ vehicle_collision_size = Vector2(26, 20)
 position = Vector2(176, 176)
 distance_between_logs = 64
 log_speed = 80.0
-movement_x_limit = 180.0
+movement_x_limit = 200.0
 
 [node name="CrocoLane" parent="WaterLanes" instance=ExtResource("11_ieehi")]
 position = Vector2(176, 144)
-turtle_sections_lenght = [5, 4, 3]
+turtle_sections_lenght = [4, 3, 3]
+distance_between_turtle_sections = 220
 turtle_speed = 60.0
-movement_x_limit = 352.0
+movement_x_limit = 300.0
 
 [node name="WaterLane3" parent="WaterLanes" instance=ExtResource("10_ubuc8")]
 position = Vector2(176, 112)

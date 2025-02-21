@@ -15,3 +15,16 @@ texture = ExtResource("2_i8duh")
 [node name="VehicleCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u4wwo")
 debug_color = Color(0.532157, 0.421014, 0.979107, 0.42)
+
+[node name="SmokeParticlesVehicle" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(32, 10)
+emitting = false
+amount = 4
+lifetime = 0.3
+explosiveness = 0.5
+randomness = 1.0
+gravity = Vector2(150, -350)
+linear_accel_max = 200.0
+scale_amount_min = 0.2
+scale_amount_max = 1.5

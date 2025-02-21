@@ -24,6 +24,7 @@ var screen_bounds = {
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var player_animation: AnimationPlayer = $PlayerAnimation
 @onready var player_collision = $PlayerCollision
+@onready var death_particles: CPUParticles2D = $DeathParticles
 
 @onready var death_timer = $DeathTimer
 
@@ -97,6 +98,7 @@ func die():
 	set_process_input(false)
 	player_collision.set_deferred("disabled", true)
 	player_animation.stop()
+	death_particles.emitting = true
 	player_sprite.visible = false
 	
 	death_timer.start()
