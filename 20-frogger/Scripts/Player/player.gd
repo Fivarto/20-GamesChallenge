@@ -123,3 +123,29 @@ func on_death_timer_timeout():
 		game_over.emit()
 	else:
 		reset_player()
+
+
+func _on_log_detector_area_entered(area):
+	
+	print("log encounter")
+	
+	print("Log Positions")
+	print(area.position)
+	print(area.global_position)
+	
+	print("Player Positions")
+	print(position)
+	print(global_position)
+	
+	print("Arvore Nó")
+	
+	print(area.get_parent())
+	print(area.get_parent().get_parent())
+	print(area.get_parent().get_parent().get_parent())
+
+
+func _on_log_detector_area_exited(area):
+	
+	print("Saiu do tronco")
+	
+	

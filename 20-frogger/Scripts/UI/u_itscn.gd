@@ -10,13 +10,15 @@ const TIME_LIMIT: float = 180
 @onready var timeout_timer = $TimeoutTimer
 @onready var timer_progress_bar = %TimerProgress
 
-var life_texture: Texture2D = preload("res://Assets/Sprites_Player/Capybara.png")
+var life_texture: Texture2D = preload("res://Assets/UI/life_texture.png")
 var lifes_textures: Array[TextureRect] = []
 
 #WIN | LOST SCREENS
 @onready var center_container = $MarginContainer/WinLoseScreen
-@onready var game_result_title = %GameResultTitle
-@onready var panel_container = $MarginContainer/WinLoseScreen/PanelContainer
+#@onready var game_result_title = %GameResultTitle
+@onready var panel_container =  $MarginContainer/WinLoseScreen/PanelContainer
+@onready var win_screen = $MarginContainer/WinLoseScreen/PanelContainer/WinScreen
+@onready var lose_screen = $MarginContainer/WinLoseScreen/PanelContainer/LoseScreen
 
 
 
@@ -51,7 +53,7 @@ func set_life_amount(lives_amount: int):
 	for i in lives_amount:
 		
 		var life_texture_rect = TextureRect.new()
-		life_texture_rect.custom_minimum_size = Vector2 (32, 32)
+		life_texture_rect.custom_minimum_size = Vector2 (16, 16)
 		life_texture_rect.texture = life_texture
 		
 		lifes_container.add_child(life_texture_rect)
@@ -67,13 +69,15 @@ func lose_life():
 #WIN | LOSE UI 
 func show_you_lose_ui():
 	timeout_timer.stop()
-	game_result_title.text = "YOU LOST! :("
+	#game_result_title.text = "YOU LOST! :("
+	lose_screen.visible = true
 	center_container.show()
 
 
 func show_you_won_ui():
 	timeout_timer.stop()
-	game_result_title.text = "YOU WON! CONGRATULATIONS"
+	#game_result_title.text = "YOU WON! CONGRATULATIONS"
+	win_screen.visible = true
 	center_container.show()
 
 

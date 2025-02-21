@@ -13,6 +13,8 @@ config_version=5
 config/name="20GC--Frogger"
 run/main_scene="res://Scenes/Level/main_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/bg_color=Color(0.116594, 0.445166, 0.286964, 1)
+boot_splash/image="res://Assets/Splash/6.png"
 config/icon="res://Assets/UI/icon.png"
 
 [display]

@@ -1,11 +1,15 @@
-[gd_scene load_steps=12 format=4 uid="uid://yy28xqi8d8lh"]
+[gd_scene load_steps=17 format=3 uid="uid://yy28xqi8d8lh"]
 
 [ext_resource type="FontFile" uid="uid://ghvifafc88cx" path="res://Assets/Fonts/PixelOperator8.ttf" id="1_3p6ni"]
 [ext_resource type="Script" path="res://Scripts/UI/u_itscn.gd" id="1_mbf3i"]
+[ext_resource type="Texture2D" uid="uid://c70a4dht4guhw" path="res://Assets/UI/life_texture.png" id="2_af85r"]
 [ext_resource type="Texture2D" uid="uid://bfxud61qsmt5m" path="res://Assets/UI/Buttons/Restart/restart_normal.png" id="3_7n3pw"]
-[ext_resource type="Texture2D" uid="uid://dy5uu5sjt7qxc" path="res://Assets/TileMaps/TileMap_Ground.png" id="3_tnp7u"]
 [ext_resource type="Texture2D" uid="uid://c3g7vxrxwrp88" path="res://Assets/UI/Buttons/Restart/restart_pressed.png" id="4_5yuq5"]
+[ext_resource type="Texture2D" uid="uid://cae8udu5evvli" path="res://Assets/UI/Screens/Win_Screen1.png" id="4_w4ac7"]
 [ext_resource type="Texture2D" uid="uid://bg2m3qkoh8ay1" path="res://Assets/UI/Buttons/Restart/restart_hover.png" id="5_n3rxm"]
+[ext_resource type="Texture2D" uid="uid://knahl7vqsm7m" path="res://Assets/UI/Screens/Win_Screen2.png" id="5_o56yw"]
+[ext_resource type="Texture2D" uid="uid://d14pdsujr23js" path="res://Assets/UI/Screens/Win_Screen3.png" id="6_23wed"]
+[ext_resource type="Texture2D" uid="uid://blex0xkblr1uu" path="res://Assets/UI/Screens/Loose_Screen1.png" id="7_5u75v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkas5"]
 bg_color = Color(1, 0.0941176, 0.298039, 1)
@@ -13,30 +17,34 @@ bg_color = Color(1, 0.0941176, 0.298039, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmh8o"]
 bg_color = Color(0.113725, 0.72549, 0.262745, 1)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qa7uu"]
-texture = ExtResource("3_tnp7u")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-1:4/0 = 0
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeiye"]
+atlas = ExtResource("4_w4ac7")
+region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="TileSet" id="TileSet_1hym1"]
-tile_size = Vector2i(32, 32)
-sources/1 = SubResource("TileSetAtlasSource_qa7uu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysgw6"]
+atlas = ExtResource("5_o56yw")
+region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8fgx"]
-bg_color = Color(0.0509804, 0.486275, 0.54902, 0.6)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2t3v"]
+atlas = ExtResource("6_23wed")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbxqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeiye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysgw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2t3v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_mbf3i")
@@ -60,6 +68,38 @@ alignment = 1
 [node name="LifesContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HUD_Container/LifesContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_af85r")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HUD_Container/LifesContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_af85r")
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HUD_Container/LifesContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_af85r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HUD_Container/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3p6ni")
+theme_override_font_sizes/font_size = 8
+text = "SCORE : 000000000"
+vertical_alignment = 1
 
 [node name="TimerContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
 layout_mode = 2
@@ -90,29 +130,28 @@ show_percentage = false
 visible = false
 layout_mode = 2
 
-[node name="TileMapLayer" type="TileMapLayer" parent="MarginContainer/WinLoseScreen"]
-tile_map_data = PackedByteArray("AAAFABIAAQABAAEAAAAGABIAAQABAAEAAAAHABIAAQABAAEAAAAIABIAAQABAAEAAAAJABIAAQABAAEAAAAKABIAAQABAAEAAAALABIAAQABAAEAAAAMABIAAQABAAEAAAANABIAAQABAAEAAAAOABIAAQABAAEAAAAPABIAAQABAAEAAAAPABEAAQABAAEAAAAPABAAAQABAAEAAAAPAA8AAQABAAEAAAAPAA4AAQABAAEAAAAPAA0AAQABAAEAAAAPAAwAAQABAAEAAAAPAAsAAQABAAEAAAAOAAsAAQABAAEAAAANAAsAAQABAAEAAAAMAAsAAQABAAEAAAALAAsAAQABAAEAAAAKAAsAAQABAAEAAAAJAAsAAQABAAEAAAAIAAsAAQABAAEAAAAHAAsAAQABAAEAAAAGAAsAAQABAAEAAAAFAAsAAQABAAEAAAAFAAwAAQABAAEAAAAFAA0AAQABAAEAAAAFAA4AAQABAAEAAAAFAA8AAQABAAEAAAAFABAAAQABAAEAAAAFABEAAQABAAEAAAAGABEAAQABAAEAAAAHABEAAQABAAEAAAAIABEAAQABAAEAAAAJABEAAQABAAEAAAAKABEAAQABAAEAAAALABEAAQABAAEAAAAMABEAAQABAAEAAAANABEAAQABAAEAAAAOABEAAQABAAEAAAAMAA8AAQABAAEAAAAMAA4AAQABAAEAAAAMAA0AAQABAAEAAAAMAAwAAQABAAEAAAALAAwAAQABAAEAAAAKAAwAAQABAAEAAAAJAAwAAQABAAEAAAAIAAwAAQABAAEAAAAHAAwAAQABAAEAAAAGAAwAAQABAAEAAAAGAA0AAQABAAEAAAAGAA4AAQABAAEAAAAGAA8AAQABAAEAAAAGABAAAQABAAEAAAAHABAAAQABAAEAAAAHAA8AAQABAAEAAAAHAA4AAQABAAEAAAAHAA0AAQABAAEAAAAIAA0AAQABAAEAAAAIAA4AAQABAAEAAAAIAA8AAQABAAEAAAAIABAAAQABAAEAAAAJABAAAQABAAEAAAAJAA8AAQABAAEAAAAJAA4AAQABAAEAAAAJAA0AAQABAAEAAAAKAA0AAQABAAEAAAAKAA4AAQABAAEAAAAKAA8AAQABAAEAAAAKABAAAQABAAEAAAALABAAAQABAAEAAAALAA8AAQABAAEAAAALAA4AAQABAAEAAAALAA0AAQABAAEAAAAMABAAAQABAAEAAAANABAAAQABAAEAAAANAA8AAQABAAEAAAANAA4AAQABAAEAAAANAA0AAQABAAEAAAANAAwAAQABAAEAAAAOAAwAAQABAAEAAAAOAA0AAQABAAEAAAAOAA4AAQABAAEAAAAOAA8AAQABAAEAAAAOABAAAQABAAEAAAAFABMAAQAAAAEAAAAGABMAAQAAAAEAAAAHABMAAQAAAAEAAAAIABMAAQAAAAEAAAAJABMAAQAAAAEAAAAKABMAAQAAAAEAAAALABMAAQAAAAEAAAAMABMAAQAAAAEAAAANABMAAQAAAAEAAAAOABMAAQAAAAEAAAAPABMAAQAAAAEAAAAPAAoAAQAAAAAAAAAOAAoAAQAAAAAAAAANAAoAAQAAAAAAAAAMAAoAAQAAAAAAAAALAAoAAQAAAAAAAAAKAAoAAQAAAAAAAAAJAAoAAQAAAAAAAAAIAAoAAQAAAAAAAAAHAAoAAQAAAAAAAAAGAAoAAQAAAAAAAAAFAAoAAQAAAAAAAAAQABMAAQABAAAAAAAQABIAAQABAAAAAAAQABEAAQABAAAAAAAQABAAAQABAAAAAAAQAA8AAQABAAAAAAAQAA4AAQABAAAAAAAQAA0AAQABAAAAAAAQAAwAAQABAAAAAAAQAAsAAQABAAAAAAAQAAoAAQABAAAAAAAEAAoAAQABAAAAAAAEAAsAAQABAAAAAAAEAAwAAQABAAAAAAAEAA0AAQABAAAAAAAEAA4AAQABAAAAAAAEAA8AAQABAAAAAAAEABAAAQABAAAAAAAEABEAAQABAAAAAAAEABIAAQABAAAAAAAEABMAAQABAAAAAAA=")
-tile_set = SubResource("TileSet_1hym1")
-
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/WinLoseScreen"]
-custom_minimum_size = Vector2(248, 248)
+custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_h8fgx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/WinLoseScreen/PanelContainer"]
-layout_mode = 2
-alignment = 1
+[node name="WinScreen" type="AnimatedSprite2D" parent="MarginContainer/WinLoseScreen/PanelContainer"]
+visible = false
+position = Vector2(176, 173)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_fbxqc")
+autoplay = "default"
+frame_progress = 0.573611
 
-[node name="GameResultTitle" type="Label" parent="MarginContainer/WinLoseScreen/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_3p6ni")
-theme_override_font_sizes/font_size = 16
-text = "YOU WON!! CONGRATULATIONS"
-horizontal_alignment = 1
+[node name="LoseScreen" type="Sprite2D" parent="MarginContainer/WinLoseScreen/PanelContainer"]
+visible = false
+position = Vector2(176, 173)
+scale = Vector2(2, 2)
+texture = ExtResource("7_5u75v")
 
-[node name="RestartButton" type="TextureButton" parent="MarginContainer/WinLoseScreen/PanelContainer/VBoxContainer"]
+[node name="RestartButton" type="TextureButton" parent="MarginContainer/WinLoseScreen/PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 texture_normal = ExtResource("3_7n3pw")
 texture_pressed = ExtResource("4_5yuq5")
 texture_hover = ExtResource("5_n3rxm")
@@ -120,4 +159,4 @@ stretch_mode = 3
 
 [node name="TimeoutTimer" type="Timer" parent="."]
 
-[connection signal="pressed" from="MarginContainer/WinLoseScreen/PanelContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/WinLoseScreen/PanelContainer/RestartButton" to="." method="_on_restart_button_pressed"]

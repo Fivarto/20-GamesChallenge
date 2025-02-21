@@ -52,6 +52,7 @@ position = Vector2(176, 112)
 position = Vector2(176, 432)
 
 [node name="HighwayLanes" type="Node" parent="."]
+process_mode = 4
 script = ExtResource("5_t66bu")
 
 [node name="HighwayLane" parent="HighwayLanes" instance=ExtResource("4_v5c12")]
