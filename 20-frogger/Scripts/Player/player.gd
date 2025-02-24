@@ -46,6 +46,9 @@ func _ready() -> void:
 	
 	#CONECTA COM O SINAL DE FINALIZAÇÃO DE TEMPO DO TIMER, CASO O TEMPO ACABE, ELIMINA O PLAYER
 	death_timer.timeout.connect(on_death_timer_timeout)
+	
+	#self.set_process_input(false)
+
 
 func _process(delta: float) -> void:
 	
@@ -120,6 +123,7 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	#CONFINAR O PLAYER DENTRO DA TELA
+	#NÃO FUNCIONANDO NO HTML
 	if position_candidate.x < screen_bounds.left or position_candidate.x > screen_bounds.right or position_candidate.y > screen_bounds.bottom - 16:
 		return
 	

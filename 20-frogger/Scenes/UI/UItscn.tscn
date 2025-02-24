@@ -167,6 +167,15 @@ vertical_alignment = 1
 
 [node name="Instrutions" type="Node" parent="."]
 
+[node name="InstructionBG" type="ColorRect" parent="Instrutions"]
+offset_left = 43.0
+offset_top = 51.0
+offset_right = 311.0
+offset_bottom = 319.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
 [node name="InstrutionLabel" type="Label" parent="Instrutions"]
 offset_left = 32.0
 offset_top = 144.0
@@ -182,7 +191,7 @@ autowrap_mode = 2
 clip_text = true
 
 [node name="InstructionTimer" type="Timer" parent="Instrutions"]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [connection signal="pressed" from="MarginContainer/WinLoseScreen/PanelContainer/RestartButton" to="." method="_on_restart_button_pressed"]

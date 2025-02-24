@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name UI
 
 signal timer_runs_out
+signal start_the_game
 
 const TIME_LIMIT: float = 180
 
@@ -30,12 +31,14 @@ var player_total_time: float
 #INSTRUCTIONS VARIABLES
 @onready var instrution_label: Label = $Instrutions/InstrutionLabel
 @onready var instruction_timer: Timer = $Instrutions/InstructionTimer
+@onready var instruction_bg = $Instrutions/InstructionBG
 
 
 func _ready():
 	
 	timeout_timer.timeout.connect(on_timeout)
 	
+	#COMEÇA O TEMPO DAS INSTRUÇÕES EM TELA, AO TERMINAR , COMEÇA O JOGO
 	instruction_timer.start()
 
 
@@ -109,7 +112,11 @@ func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
 
 
+
 func _on_instruction_timer_timeout() -> void:
 	
-	instrution_label.visible = false
+	start_the_game.emit()
 	timeout_timer.start()
+	instrution_label.visible = false
+	instruction_bg.visible = false
+	

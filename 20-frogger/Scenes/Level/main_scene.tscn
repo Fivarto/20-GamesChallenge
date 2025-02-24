@@ -60,6 +60,7 @@ tile_set = SubResource("TileSet_rx6d1")
 position = Vector2(176, 112)
 
 [node name="HighwayLanes" type="Node" parent="Canvas/CenterContainer"]
+process_mode = 4
 script = ExtResource("5_t66bu")
 
 [node name="HighwayLane" parent="Canvas/CenterContainer/HighwayLanes" instance=ExtResource("4_v5c12")]
@@ -98,6 +99,7 @@ vehicles_speed = 80.0
 vehicle_collision_size = Vector2(26, 20)
 
 [node name="WaterLanes" type="Node" parent="Canvas/CenterContainer"]
+process_mode = 4
 
 [node name="WaterLane" parent="Canvas/CenterContainer/WaterLanes" instance=ExtResource("10_ubuc8")]
 position = Vector2(176, 176)

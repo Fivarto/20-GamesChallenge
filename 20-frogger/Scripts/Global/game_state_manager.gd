@@ -4,6 +4,8 @@ extends Node
 @onready var home_slots = $"../HomeSlots" as HomeSlots
 @onready var ui = $"../UI" as UI
 
+@onready var highway_lanes = $"../HighwayLanes"
+@onready var water_lanes = $"../WaterLanes"
 
 func _ready():
 	
@@ -16,7 +18,7 @@ func _ready():
 	
 	ui.timer_runs_out.connect(kill_player)
 	
-	
+	ui.start_the_game.connect(turn_on_the_game)
 	ui.set_life_amount(player.lifes)
 
 
@@ -49,3 +51,10 @@ func on_game_over():
 	
 	ui.show_you_lose_ui()
 	
+
+func turn_on_the_game():
+	
+	highway_lanes.process_mode = 0
+	water_lanes.process_mode = 0
+	
+	player.set_process_input(true)
