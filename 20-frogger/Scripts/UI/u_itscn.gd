@@ -21,17 +21,33 @@ var lifes_textures: Array[TextureRect] = []
 @onready var lose_screen = $MarginContainer/WinLoseScreen/PanelContainer/LoseScreen
 
 
+#PLAYER TIMER
+var current_player_time: float
+var player_total_time: float
+@onready var time_score_lable: Label = $MarginContainer/WinLoseScreen/VBoxContainer/TimeScoreLable
+
+
+#INSTRUCTIONS VARIABLES
+@onready var instrution_label: Label = $Instrutions/InstrutionLabel
+@onready var instruction_timer: Timer = $Instrutions/InstructionTimer
+
 
 func _ready():
 	
 	timeout_timer.timeout.connect(on_timeout)
-	timeout_timer.start()
+	
+	instruction_timer.start()
+
+
 
 #TIMER CONTAINER
 func on_timeout():
 	var new_progress_bar_value = timer_progress_bar.value - 1
 	
+	#DIMINUI O TEMPO NA PROGRESS BAR
 	timer_progress_bar.set_value(new_progress_bar_value)
+	
+	current_player_time = TIME_LIMIT - new_progress_bar_value
 	
 	if new_progress_bar_value == 0:
 		print("Acabou o tempo , recomeçar a barra de tempo")
@@ -41,6 +57,10 @@ func on_timeout():
 		
 
 func reset_timer():
+	
+	player_total_time += current_player_time
+	
+	current_player_time = 0
 	
 	timer_progress_bar.set_value(TIME_LIMIT)
 	timeout_timer.start()
@@ -59,6 +79,7 @@ func set_life_amount(lives_amount: int):
 		lifes_container.add_child(life_texture_rect)
 		lifes_textures.append(life_texture_rect)
 
+#ATUALIZAR OS SCPRITES DE LIFE
 func lose_life():
 	
 	var texture_life = lifes_textures.pop_back()
@@ -69,6 +90,7 @@ func lose_life():
 #WIN | LOSE UI 
 func show_you_lose_ui():
 	timeout_timer.stop()
+	time_score_lable.text = ("Time: " + str(player_total_time) + "s")
 	#game_result_title.text = "YOU LOST! :("
 	lose_screen.visible = true
 	center_container.show()
@@ -77,9 +99,17 @@ func show_you_lose_ui():
 func show_you_won_ui():
 	timeout_timer.stop()
 	#game_result_title.text = "YOU WON! CONGRATULATIONS"
+	player_total_time += current_player_time
+	time_score_lable.text = ("Time: " + str(player_total_time) + "s")
 	win_screen.visible = true
 	center_container.show()
 
 
 func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
+
+
+func _on_instruction_timer_timeout() -> void:
+	
+	instrution_label.visible = false
+	timeout_timer.start()

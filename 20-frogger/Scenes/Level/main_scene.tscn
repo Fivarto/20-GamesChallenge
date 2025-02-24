@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dahljhgyivocf"]
+[gd_scene load_steps=20 format=4 uid="uid://dahljhgyivocf"]
 
 [ext_resource type="Texture2D" uid="uid://dy5uu5sjt7qxc" path="res://Assets/TileMaps/TileMap_Ground.png" id="1_ljsb6"]
 [ext_resource type="PackedScene" uid="uid://0l6nbin1kcj5" path="res://Scenes/Player/player.tscn" id="2_mxi1f"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/Home/home_slots.gd" id="14_h3al6"]
 [ext_resource type="PackedScene" uid="uid://yy28xqi8d8lh" path="res://Scenes/UI/UItscn.tscn" id="16_cbig0"]
 [ext_resource type="PackedScene" uid="uid://c1yqfw7jqo5cy" path="res://Shaders/CRT_SHADERtscn.tscn" id="16_ck4n0"]
+[ext_resource type="AudioStream" uid="uid://c004nq7a2kg48" path="res://Assets/MusicAndSounds/KleptoLindaCavernsA.wav" id="17_m6tch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7twil"]
 texture = ExtResource("1_ljsb6")
@@ -37,30 +38,36 @@ sources/0 = SubResource("TileSetAtlasSource_7twil")
 
 [node name="MainScene" type="Node"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Canvas/CenterContainer"]
 tile_map_data = PackedByteArray("AAABAAAAAAAAAAMAAAADAAAAAAAAAAMAAAAFAAAAAAAAAAMAAAAHAAAAAAAAAAMAAAAJAAAAAAAAAAMAAAAIAAAAAAAAAAIAAAAKAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAAEAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAAKAAQAAAABAAAAAAAKAAMAAAABAAAAAAAKAAIAAAABAAAAAAAKAAEAAAAAAAEAAAADAAQAAAABAAAAAAADAAMAAAABAAAAAAADAAIAAAABAAAAAAADAAEAAAAAAAEAAAACAAEAAAAAAAEAAAABAAEAAAAAAAEAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAACAAQAAAABAAAAAAACAAMAAAABAAAAAAACAAIAAAABAAAAAAAEAAEAAAAAAAEAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAFAAQAAAABAAAAAAAFAAMAAAABAAAAAAAFAAIAAAABAAAAAAAFAAEAAAAAAAEAAAAGAAEAAAAAAAEAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAAAAAAHAAQAAAABAAAAAAAHAAMAAAABAAAAAAAHAAIAAAABAAAAAAAHAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAJAAQAAAABAAAAAAAJAAMAAAABAAAAAAAJAAIAAAABAAAAAAAJAAEAAAAAAAEAAAAAAAYAAAABAAEAAAABAAYAAAABAAEAAAACAAYAAAABAAEAAAADAAYAAAABAAEAAAAEAAYAAAABAAEAAAAFAAYAAAABAAEAAAAGAAYAAAABAAEAAAAHAAYAAAABAAEAAAAIAAYAAAABAAEAAAAJAAYAAAABAAEAAAAKAAYAAAABAAEAAAAKAAcAAAABAAIAAAAJAAcAAAABAAIAAAAIAAcAAAABAAIAAAAHAAcAAAABAAIAAAAGAAcAAAABAAIAAAAFAAcAAAABAAIAAAAEAAcAAAABAAIAAAADAAcAAAABAAIAAAACAAcAAAABAAIAAAABAAcAAAABAAIAAAAAAAcAAAABAAIAAAAAAAgAAAABAAMAAAAAAAkAAAABAAMAAAAAAAoAAAABAAMAAAAAAAsAAAABAAMAAAAAAAwAAAABAAMAAAAKAAwAAAABAAMAAAAJAAwAAAABAAMAAAAIAAwAAAABAAMAAAAHAAwAAAABAAMAAAAGAAwAAAABAAMAAAAFAAwAAAABAAMAAAAEAAwAAAABAAMAAAADAAwAAAABAAMAAAACAAwAAAABAAMAAAABAAwAAAABAAMAAAAKAAsAAAABAAMAAAAKAAoAAAABAAMAAAAKAAkAAAABAAMAAAAKAAgAAAABAAMAAAAEAAsAAAABAAMAAAAEAAoAAAABAAMAAAAEAAkAAAABAAMAAAAEAAgAAAABAAMAAAADAAgAAAABAAMAAAACAAgAAAABAAMAAAABAAgAAAABAAMAAAABAAkAAAABAAMAAAABAAoAAAABAAMAAAABAAsAAAABAAMAAAACAAsAAAABAAMAAAACAAoAAAABAAMAAAACAAkAAAABAAMAAAADAAkAAAABAAMAAAADAAoAAAABAAMAAAADAAsAAAABAAMAAAAFAAgAAAABAAMAAAAFAAkAAAABAAMAAAAFAAoAAAABAAMAAAAFAAsAAAABAAMAAAAGAAsAAAABAAMAAAAGAAoAAAABAAMAAAAGAAkAAAABAAMAAAAGAAgAAAABAAMAAAAHAAgAAAABAAMAAAAHAAkAAAABAAMAAAAHAAoAAAABAAMAAAAHAAsAAAABAAMAAAAIAAsAAAABAAMAAAAIAAoAAAABAAMAAAAIAAkAAAABAAMAAAAIAAgAAAABAAMAAAAJAAgAAAABAAMAAAAJAAkAAAABAAMAAAAJAAoAAAABAAMAAAAJAAsAAAABAAMAAAAAAA0AAAABAAQAAAABAA0AAAABAAQAAAACAA0AAAABAAQAAAADAA0AAAABAAQAAAAEAA0AAAABAAQAAAAFAA0AAAABAAQAAAAGAA0AAAABAAQAAAAHAA0AAAABAAQAAAAIAA0AAAABAAQAAAAJAA0AAAABAAQAAAAKAA0AAAABAAQAAAA=")
 tile_set = SubResource("TileSet_rx6d1")
 
-[node name="UI" parent="." instance=ExtResource("16_cbig0")]
+[node name="UI" parent="Canvas/CenterContainer" instance=ExtResource("16_cbig0")]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("16_ck4n0")]
+[node name="CanvasLayer" parent="Canvas/CenterContainer" instance=ExtResource("16_ck4n0")]
 
-[node name="Water" parent="." instance=ExtResource("9_7j7eu")]
+[node name="Water" parent="Canvas/CenterContainer" instance=ExtResource("9_7j7eu")]
 position = Vector2(176, 112)
 
-[node name="Player" parent="." instance=ExtResource("2_mxi1f")]
-position = Vector2(176, 432)
-
-[node name="HighwayLanes" type="Node" parent="."]
-process_mode = 4
+[node name="HighwayLanes" type="Node" parent="Canvas/CenterContainer"]
 script = ExtResource("5_t66bu")
 
-[node name="HighwayLane" parent="HighwayLanes" instance=ExtResource("4_v5c12")]
+[node name="HighwayLane" parent="Canvas/CenterContainer/HighwayLanes" instance=ExtResource("4_v5c12")]
 position = Vector2(176, 400)
 vehicle_texture = ExtResource("5_o0ban")
 vehicle_collision_size = Vector2(26, 20)
 
-[node name="HighwayLane2" parent="HighwayLanes" instance=ExtResource("4_v5c12")]
+[node name="HighwayLane2" parent="Canvas/CenterContainer/HighwayLanes" instance=ExtResource("4_v5c12")]
 position = Vector2(176, 368)
 direction = -1
 vehicle_texture = ExtResource("6_jo0dy")
@@ -69,79 +76,86 @@ vehicles_speed = 120.0
 movement_x_limit = -352.0
 vehicle_collision_size = Vector2(34, 20)
 
-[node name="HighwayLane3" parent="HighwayLanes" instance=ExtResource("4_v5c12")]
+[node name="HighwayLane3" parent="Canvas/CenterContainer/HighwayLanes" instance=ExtResource("4_v5c12")]
 position = Vector2(176, 336)
 vehicle_texture = ExtResource("7_l8ewj")
 distance_between_vehicles = 35
 vehicles_speed = 250.0
 vehicle_collision_size = Vector2(22, 20)
 
-[node name="HighwayLane4" parent="HighwayLanes" instance=ExtResource("4_v5c12")]
+[node name="HighwayLane4" parent="Canvas/CenterContainer/HighwayLanes" instance=ExtResource("4_v5c12")]
 position = Vector2(176, 304)
 vehicle_texture = ExtResource("8_car6q")
 distance_between_vehicles = 200
 vehicles_speed = 80.0
 vehicle_collision_size = Vector2(58, 20)
 
-[node name="HighwayLane5" parent="HighwayLanes" instance=ExtResource("4_v5c12")]
+[node name="HighwayLane5" parent="Canvas/CenterContainer/HighwayLanes" instance=ExtResource("4_v5c12")]
 position = Vector2(176, 272)
 vehicle_texture = ExtResource("5_o0ban")
 distance_between_vehicles = 200
 vehicles_speed = 80.0
 vehicle_collision_size = Vector2(26, 20)
 
-[node name="WaterLanes" type="Node" parent="."]
+[node name="WaterLanes" type="Node" parent="Canvas/CenterContainer"]
 
-[node name="WaterLane" parent="WaterLanes" instance=ExtResource("10_ubuc8")]
+[node name="WaterLane" parent="Canvas/CenterContainer/WaterLanes" instance=ExtResource("10_ubuc8")]
 position = Vector2(176, 176)
 distance_between_logs = 64
 log_speed = 80.0
 movement_x_limit = 200.0
 
-[node name="CrocoLane" parent="WaterLanes" instance=ExtResource("11_ieehi")]
+[node name="CrocoLane" parent="Canvas/CenterContainer/WaterLanes" instance=ExtResource("11_ieehi")]
 position = Vector2(176, 144)
 turtle_sections_lenght = [4, 3, 3]
 distance_between_turtle_sections = 220
 turtle_speed = 60.0
 movement_x_limit = 300.0
 
-[node name="WaterLane3" parent="WaterLanes" instance=ExtResource("10_ubuc8")]
+[node name="WaterLane3" parent="Canvas/CenterContainer/WaterLanes" instance=ExtResource("10_ubuc8")]
 position = Vector2(176, 112)
 logs_length = [5, 5, 4]
 distance_between_logs = 64
 log_speed = 80.0
 movement_x_limit = 352.0
 
-[node name="CrocoLane2" parent="WaterLanes" instance=ExtResource("11_ieehi")]
+[node name="CrocoLane2" parent="Canvas/CenterContainer/WaterLanes" instance=ExtResource("11_ieehi")]
 position = Vector2(176, 80)
 distance_between_turtle_sections = 90
 turtle_speed = 80.0
 movement_x_limit = -360.0
 movement_direction = -1
 
-[node name="WaterLane5" parent="WaterLanes" instance=ExtResource("10_ubuc8")]
+[node name="WaterLane5" parent="Canvas/CenterContainer/WaterLanes" instance=ExtResource("10_ubuc8")]
 position = Vector2(176, 48)
 distance_between_logs = 64
 log_speed = 80.0
 movement_x_limit = 280.0
 
-[node name="GameStateManager" type="Node" parent="."]
+[node name="GameStateManager" type="Node" parent="Canvas/CenterContainer"]
 script = ExtResource("13_0sm5o")
 
-[node name="HomeSlots" type="Node" parent="."]
+[node name="HomeSlots" type="Node" parent="Canvas/CenterContainer"]
 script = ExtResource("14_h3al6")
 
-[node name="HomeSlot" parent="HomeSlots" instance=ExtResource("14_d2whn")]
+[node name="HomeSlot" parent="Canvas/CenterContainer/HomeSlots" instance=ExtResource("14_d2whn")]
 position = Vector2(48, 16)
 
-[node name="HomeSlot2" parent="HomeSlots" instance=ExtResource("14_d2whn")]
+[node name="HomeSlot2" parent="Canvas/CenterContainer/HomeSlots" instance=ExtResource("14_d2whn")]
 position = Vector2(112, 16)
 
-[node name="HomeSlot3" parent="HomeSlots" instance=ExtResource("14_d2whn")]
+[node name="HomeSlot3" parent="Canvas/CenterContainer/HomeSlots" instance=ExtResource("14_d2whn")]
 position = Vector2(176, 16)
 
-[node name="HomeSlot4" parent="HomeSlots" instance=ExtResource("14_d2whn")]
+[node name="HomeSlot4" parent="Canvas/CenterContainer/HomeSlots" instance=ExtResource("14_d2whn")]
 position = Vector2(240, 16)
 
-[node name="HomeSlot5" parent="HomeSlots" instance=ExtResource("14_d2whn")]
+[node name="HomeSlot5" parent="Canvas/CenterContainer/HomeSlots" instance=ExtResource("14_d2whn")]
 position = Vector2(304, 16)
+
+[node name="Player" parent="Canvas/CenterContainer" instance=ExtResource("2_mxi1f")]
+position = Vector2(176, 432)
+
+[node name="MainLevelSong" type="AudioStreamPlayer2D" parent="Canvas/CenterContainer"]
+stream = ExtResource("17_m6tch")
+autoplay = true

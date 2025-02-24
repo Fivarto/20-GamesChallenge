@@ -5,8 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://bvesxba1vn0v2" path="res://Assets/Sprite_Enemies/turtle3.png" id="2_68cuy"]
 [ext_resource type="Texture2D" uid="uid://bu7mccymchh2" path="res://Assets/Sprite_Enemies/turtle2.png" id="3_5lkpr"]
 
+[sub_resource type="Gradient" id="Gradient_5cybd"]
+offsets = PackedFloat32Array(0, 0.52)
+colors = PackedColorArray(0.0509804, 1, 1, 1, 0.262745, 0.164706, 0.823529, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0qed"]
-size = Vector2(31, 26)
+size = Vector2(30, 26)
 
 [sub_resource type="Animation" id="Animation_2y3gh"]
 length = 0.001
@@ -46,28 +50,11 @@ _data = {
 "swin": SubResource("Animation_384p1")
 }
 
-[sub_resource type="Gradient" id="Gradient_5cybd"]
-offsets = PackedFloat32Array(0, 0.52)
-colors = PackedColorArray(0.0509804, 1, 1, 1, 0.262745, 0.164706, 0.823529, 1)
-
-[node name="Croco" type="Area2D"]
+[node name="Croco" type="Area2D" groups=["turtle"]]
+collision_layer = 9
 script = ExtResource("1_ru6xx")
 
-[node name="TurtleSprite" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("1_v73ff")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_y0qed")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_46ves")
-}
-autoplay = "swin"
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="WaterParticles" type="CPUParticles2D" parent="."]
 position = Vector2(18, 0)
 lifetime = 0.5
 emission_shape = 1
@@ -77,3 +64,16 @@ initial_velocity_max = 50.0
 scale_amount_min = 0.5
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_5cybd")
+
+[node name="TurtleSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_v73ff")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y0qed")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_46ves")
+}
+autoplay = "swin"

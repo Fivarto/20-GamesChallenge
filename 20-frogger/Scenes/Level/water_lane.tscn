@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/Enemies/water_lane.gd" id="1_dyth7"]
 
-[node name="WaterLane" type="Node2D"]
+[node name="WaterLane" type="Node2D" groups=["log"]]
 script = ExtResource("1_dyth7")

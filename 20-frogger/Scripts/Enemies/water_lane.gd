@@ -46,6 +46,7 @@ func _process(delta: float) -> void:
 		var new_position_x = log_speed * delta * movement_direction + log.position.x
 		if abs(new_position_x - movement_x_limit) < 10:
 			log.position.x = -movement_x_limit
-		
+			
 		else:
 			log.position.x = new_position_x
+			

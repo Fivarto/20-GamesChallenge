@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/Turtles/croco_lane.gd" id="1_t2bt2"]
 
-[node name="CrocoLane" type="Node2D"]
+[node name="CrocoLane" type="Node2D" groups=["turtle"]]
 script = ExtResource("1_t2bt2")

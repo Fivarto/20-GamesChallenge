@@ -21,23 +21,23 @@ func _ready():
 
 
 func on_player_lost_a_life():
-	print("PLAYER PERDEU UMA VIDA")
+	#print("PLAYER PERDEU UMA VIDA")
 	
 	ui.reset_timer()
 	ui.lose_life()
 
 func kill_player():
-	print("PLAYER DIED")
+	#print("PLAYER DIED")
 	
 	player.die()
 
 func on_one_home_slots_filled():
-	print("CAPIVARA CHEGOU EM CASA")
+	#print("CAPIVARA CHEGOU EM CASA")
 	
 	player.reset_player()
 
 func on_all_home_slots_filled():
-	print("PLAYER WIN")
+	#print("PLAYER WIN")
 	
 	ui.show_you_won_ui()
 	
@@ -45,7 +45,7 @@ func on_all_home_slots_filled():
 
 
 func on_game_over():
-	print("GAME OVER")
+	#print("GAME OVER")
 	
 	ui.show_you_lose_ui()
 	

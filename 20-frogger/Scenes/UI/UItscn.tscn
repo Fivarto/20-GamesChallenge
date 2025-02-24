@@ -2,7 +2,6 @@
 
 [ext_resource type="FontFile" uid="uid://ghvifafc88cx" path="res://Assets/Fonts/PixelOperator8.ttf" id="1_3p6ni"]
 [ext_resource type="Script" path="res://Scripts/UI/u_itscn.gd" id="1_mbf3i"]
-[ext_resource type="Texture2D" uid="uid://c70a4dht4guhw" path="res://Assets/UI/life_texture.png" id="2_af85r"]
 [ext_resource type="Texture2D" uid="uid://bfxud61qsmt5m" path="res://Assets/UI/Buttons/Restart/restart_normal.png" id="3_7n3pw"]
 [ext_resource type="Texture2D" uid="uid://c3g7vxrxwrp88" path="res://Assets/UI/Buttons/Restart/restart_pressed.png" id="4_5yuq5"]
 [ext_resource type="Texture2D" uid="uid://cae8udu5evvli" path="res://Assets/UI/Screens/Win_Screen1.png" id="4_w4ac7"]
@@ -46,6 +45,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yl8wu"]
+
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_mbf3i")
 
@@ -70,25 +71,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HUD_Container/LifesContainer"]
-visible = false
-custom_minimum_size = Vector2(16, 16)
+[node name="Label" type="Label" parent="MarginContainer/HUD_Container/LifesContainer"]
 layout_mode = 2
-texture = ExtResource("2_af85r")
-
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HUD_Container/LifesContainer"]
-visible = false
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-texture = ExtResource("2_af85r")
-
-[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HUD_Container/LifesContainer"]
-visible = false
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 2
-texture = ExtResource("2_af85r")
+theme_override_fonts/font = ExtResource("1_3p6ni")
+theme_override_font_sizes/font_size = 8
+text = "lives"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -98,7 +88,8 @@ custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_3p6ni")
 theme_override_font_sizes/font_size = 8
-text = "SCORE : 000000000"
+text = "SCORE : 0000
+"
 vertical_alignment = 1
 
 [node name="TimerContainer" type="HBoxContainer" parent="MarginContainer/HUD_Container"]
@@ -135,7 +126,6 @@ custom_minimum_size = Vector2(350, 350)
 layout_mode = 2
 
 [node name="WinScreen" type="AnimatedSprite2D" parent="MarginContainer/WinLoseScreen/PanelContainer"]
-visible = false
 position = Vector2(176, 173)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fbxqc")
@@ -157,6 +147,43 @@ texture_pressed = ExtResource("4_5yuq5")
 texture_hover = ExtResource("5_n3rxm")
 stretch_mode = 3
 
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/WinLoseScreen"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/WinLoseScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 128
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yl8wu")
+
+[node name="TimeScoreLable" type="Label" parent="MarginContainer/WinLoseScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3p6ni")
+theme_override_font_sizes/font_size = 8
+text = "Time : 0000000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TimeoutTimer" type="Timer" parent="."]
 
+[node name="Instrutions" type="Node" parent="."]
+
+[node name="InstrutionLabel" type="Label" parent="Instrutions"]
+offset_left = 32.0
+offset_top = 144.0
+offset_right = 320.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("1_3p6ni")
+theme_override_font_sizes/font_size = 16
+text = "ajude as capivaras a chegar em casa 
+
+Use as Setas ou WASD"
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="InstructionTimer" type="Timer" parent="Instrutions"]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="pressed" from="MarginContainer/WinLoseScreen/PanelContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="timeout" from="Instrutions/InstructionTimer" to="." method="_on_instruction_timer_timeout"]
